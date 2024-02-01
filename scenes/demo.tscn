@@ -1,0 +1,69 @@
+[gd_scene load_steps=8 format=3 uid="uid://bmi8sqnmu1utc"]
+
+[ext_resource type="PackedScene" uid="uid://dmek2nyuv6slq" path="res://scenes/player.tscn" id="1_hmerg"]
+[ext_resource type="PackedScene" uid="uid://qsedcgegokq2" path="res://scenes/bullets/bullet_blue_round.tscn" id="2_1slwy"]
+[ext_resource type="PackedScene" uid="uid://b68wx6n7c0741" path="res://scenes/enemy-demo.tscn" id="2_tg6k0"]
+[ext_resource type="PackedScene" uid="uid://bot1ogebwgig8" path="res://scenes/bullets/bullet_pink_fast.tscn" id="4_rqvwe"]
+[ext_resource type="Script" path="res://scripts/destroyer.gd" id="5_usejr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q3mws"]
+size = Vector2(87, 880)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4gg3g"]
+size = Vector2(524.5, 47.7403)
+
+[node name="demo" type="Node2D"]
+
+[node name="enemy-demo3" parent="." instance=ExtResource("2_tg6k0")]
+position = Vector2(12, 6)
+bullet_scene = ExtResource("2_1slwy")
+rotate_speed = 5
+shooter_timer_wait_time = 0.3
+spawn_point_count = 8
+radius = 4
+bullet_speed = 200
+
+[node name="enemy-demo4" parent="." instance=ExtResource("2_tg6k0")]
+position = Vector2(475, 9)
+bullet_scene = ExtResource("2_1slwy")
+rotate_speed = -5
+shooter_timer_wait_time = 0.3
+spawn_point_count = 8
+radius = 4
+bullet_speed = 200
+
+[node name="Player" parent="." instance=ExtResource("1_hmerg")]
+position = Vector2(222, 546)
+
+[node name="enemy-demo" parent="." instance=ExtResource("2_tg6k0")]
+position = Vector2(250, 154)
+bullet_scene = ExtResource("4_rqvwe")
+rotate_speed = 20
+shooter_timer_wait_time = 0.2
+spawn_point_count = 6
+radius = 4
+bullet_speed = 300
+
+[node name="Destroyer" type="Area2D" parent="."]
+position = Vector2(0, -77)
+script = ExtResource("5_usejr")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Destroyer"]
+position = Vector2(558, 378)
+shape = SubResource("RectangleShape2D_q3mws")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Destroyer"]
+position = Vector2(239.75, 17)
+shape = SubResource("RectangleShape2D_4gg3g")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Destroyer"]
+position = Vector2(-73, 374)
+shape = SubResource("RectangleShape2D_q3mws")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Destroyer"]
+position = Vector2(244, 754)
+shape = SubResource("RectangleShape2D_4gg3g")
+
+[connection signal="area_entered" from="Destroyer" to="Destroyer" method="_on_area_entered"]

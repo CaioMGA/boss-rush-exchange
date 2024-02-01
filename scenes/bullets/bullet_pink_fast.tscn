@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://bot1ogebwgig8"]
+
+[ext_resource type="Script" path="res://scenes/bullets/bullet.gd" id="1_dsqd8"]
+[ext_resource type="Texture2D" uid="uid://dgsmwppmg42kr" path="res://art/bullets/pink_fast.png" id="2_c4l1h"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_75y3y"]
+radius = 6.0
+
+[node name="Bullet" type="Area2D" groups=["bullets"]]
+script = ExtResource("1_dsqd8")
+
+[node name="Sprite2D" type="Sprite2D" parent="." groups=["bullets"]]
+texture = ExtResource("2_c4l1h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["bullets"]]
+position = Vector2(7, 0)
+shape = SubResource("CircleShape2D_75y3y")
+
+[node name="KillTimer" type="Timer" parent="." groups=["bullets"]]
+wait_time = 4.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="KillTimer" to="." method="_on_kill_timer_timeout"]
