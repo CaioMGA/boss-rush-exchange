@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dmek2nyuv6slq"]
+[gd_scene load_steps=19 format=3 uid="uid://dmek2nyuv6slq"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_i2l1a"]
 [ext_resource type="Texture2D" uid="uid://bc30x73yf6wyq" path="res://art/hero/bank_left/1.png" id="2_bw21a"]
@@ -14,6 +14,8 @@
 [ext_resource type="Texture2D" uid="uid://c1uy7d48aqs6e" path="res://art/hero/bank_right/2.png" id="7_yox0n"]
 [ext_resource type="Texture2D" uid="uid://b4lo7xeh6jqh" path="res://art/hero/bank_right/3.png" id="8_eyujq"]
 [ext_resource type="Texture2D" uid="uid://u76jto25ys67" path="res://art/hero/bank_right/4.png" id="9_ackem"]
+[ext_resource type="Script" path="res://scripts/player_shooter.gd" id="15_gfbml"]
+[ext_resource type="PackedScene" uid="uid://cuvdwcq4i27e5" path="res://scenes/bullets/bullet_green_fast.tscn" id="16_y3xot"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2tbsi"]
 animations = [{
@@ -82,6 +84,7 @@ sprite_frames = SubResource("SpriteFrames_2tbsi")
 animation = &"idle"
 
 [node name="Sprite2D" type="Sprite2D" parent="AnimatedSprite2D" groups=["player"]]
+z_index = 1000
 texture_filter = 1
 texture_repeat = 1
 position = Vector2(1.90735e-06, -133.333)
@@ -95,7 +98,43 @@ shape = SubResource("RectangleShape2D_tyvgb")
 debug_color = Color(0.956863, 0, 0.529412, 0.419608)
 
 [node name="Shooter" type="Node2D" parent="."]
+script = ExtResource("15_gfbml")
+bullet_scene = ExtResource("16_y3xot")
+bullet_speed = 800
+
+[node name="ShootTimer" type="Timer" parent="Shooter"]
+wait_time = 0.1
+autostart = true
+
+[node name="CenterShot" type="Node2D" parent="Shooter"]
 position = Vector2(0, -14)
+rotation = -1.5708
+
+[node name="LeftShot" type="Node2D" parent="Shooter"]
+position = Vector2(-10, -10)
+rotation = -1.74533
+
+[node name="RightShot" type="Node2D" parent="Shooter"]
+position = Vector2(10, -10)
+rotation = -1.39626
+
+[node name="FocusShooter" type="Node2D" parent="."]
+visible = false
+
+[node name="ShootTimer" type="Timer" parent="FocusShooter"]
+wait_time = 0.1
+one_shot = true
+
+[node name="CenterShot" type="Node2D" parent="FocusShooter"]
+position = Vector2(0, -14)
+
+[node name="LeftShot" type="Node2D" parent="FocusShooter"]
+position = Vector2(-3, -10)
+
+[node name="RightShot" type="Node2D" parent="FocusShooter"]
+position = Vector2(3, -10)
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Shooter/ShootTimer" to="Shooter" method="_on_shoot_timer_timeout" flags=18]
+[connection signal="timeout" from="FocusShooter/ShootTimer" to="FocusShooter" method="_on_shoot_timer_timeout" flags=18]

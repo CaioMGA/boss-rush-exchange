@@ -3,8 +3,8 @@ extends Area2D
 signal player_hurt
 
 @export var bullet_scene = preload("res://scenes/bullets/bullet_blue_fast.tscn")
-@export var normal_speed = 400
-@export var focus_speed = 200
+@export var normal_speed = 200
+@export var focus_speed = 100
 var speed
 var screen_size
 var is_moving_slow = false;
@@ -48,7 +48,6 @@ func _process(delta):
 
 
 func hurt():
-	print("ouch")
 	emit_signal("player_hurt")
 
 func _on_area_entered(area):

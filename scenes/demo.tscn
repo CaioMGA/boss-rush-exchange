@@ -67,3 +67,5 @@ position = Vector2(244, 754)
 shape = SubResource("RectangleShape2D_4gg3g")
 
 [connection signal="area_entered" from="Destroyer" to="Destroyer" method="_on_area_entered"]
+
+[editable path="Player"]
