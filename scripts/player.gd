@@ -5,9 +5,14 @@ signal player_hurt
 @export var bullet_scene = preload("res://scenes/bullets/bullet_blue_fast.tscn")
 @export var normal_speed = 200
 @export var focus_speed = 100
+
+@export var regular_shoot_timer:Timer
+@export var focus_shoot_timer:Timer
+
 var speed
 var screen_size
-var is_moving_slow = false;
+var is_moving_slow = false
+var is_focus_shooting = true
 var life = 3
 
 func _ready():
@@ -21,8 +26,16 @@ func _process(delta):
 	
 	if is_moving_slow:
 		speed = focus_speed
+		if !is_focus_shooting:
+			is_focus_shooting = true
+			regular_shoot_timer.stop()
+			focus_shoot_timer.start()
 	else:
 		speed = normal_speed
+		if is_focus_shooting:
+			is_focus_shooting = false
+			regular_shoot_timer.start()
+			focus_shoot_timer.stop()
 	
 	if Input.is_action_pressed("move_right"):
 		velocity.x += 1;

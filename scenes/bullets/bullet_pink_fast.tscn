@@ -10,6 +10,7 @@ radius = 6.0
 script = ExtResource("1_dsqd8")
 
 [node name="Sprite2D" type="Sprite2D" parent="." groups=["bullets"]]
+modulate = Color(1, 1, 1, 0.411765)
 texture = ExtResource("2_c4l1h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["bullets"]]

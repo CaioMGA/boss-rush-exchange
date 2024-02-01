@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dmek2nyuv6slq"]
+[gd_scene load_steps=21 format=3 uid="uid://dmek2nyuv6slq"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_i2l1a"]
 [ext_resource type="Texture2D" uid="uid://bc30x73yf6wyq" path="res://art/hero/bank_left/1.png" id="2_bw21a"]
@@ -15,7 +15,9 @@
 [ext_resource type="Texture2D" uid="uid://b4lo7xeh6jqh" path="res://art/hero/bank_right/3.png" id="8_eyujq"]
 [ext_resource type="Texture2D" uid="uid://u76jto25ys67" path="res://art/hero/bank_right/4.png" id="9_ackem"]
 [ext_resource type="Script" path="res://scripts/player_shooter.gd" id="15_gfbml"]
+[ext_resource type="Texture2D" uid="uid://bqelhxlpxyhfl" path="res://art/hero/core.png" id="15_pcla6"]
 [ext_resource type="PackedScene" uid="uid://cuvdwcq4i27e5" path="res://scenes/bullets/bullet_green_fast.tscn" id="16_y3xot"]
+[ext_resource type="PackedScene" uid="uid://bot1ogebwgig8" path="res://scenes/bullets/bullet_pink_fast.tscn" id="18_gnee1"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2tbsi"]
 animations = [{
@@ -74,8 +76,10 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tyvgb"]
 size = Vector2(9.33333, 9.33333)
 
-[node name="Player" type="Area2D" groups=["player"]]
+[node name="Player" type="Area2D" node_paths=PackedStringArray("regular_shoot_timer", "focus_shoot_timer") groups=["player"]]
 script = ExtResource("1_i2l1a")
+regular_shoot_timer = NodePath("Shooter/ShootTimer")
+focus_shoot_timer = NodePath("FocusShooter/ShootTimer")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["player"]]
 position = Vector2(0, 25)
@@ -84,12 +88,19 @@ sprite_frames = SubResource("SpriteFrames_2tbsi")
 animation = &"idle"
 
 [node name="Sprite2D" type="Sprite2D" parent="AnimatedSprite2D" groups=["player"]]
-z_index = 1000
 texture_filter = 1
 texture_repeat = 1
 position = Vector2(1.90735e-06, -133.333)
 scale = Vector2(17.1429, 17.1429)
 texture = ExtResource("5_k7cg7")
+
+[node name="Core" type="Sprite2D" parent="AnimatedSprite2D" groups=["player"]]
+z_index = 1000
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(-2.27374e-13, -133.333)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("15_pcla6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["player"]]
 position = Vector2(2.98023e-08, 5)
@@ -102,6 +113,9 @@ script = ExtResource("15_gfbml")
 bullet_scene = ExtResource("16_y3xot")
 bullet_speed = 800
 
+[node name="ShotModulation" type="Timer" parent="Shooter"]
+wait_time = 0.05
+
 [node name="ShootTimer" type="Timer" parent="Shooter"]
 wait_time = 0.1
 autostart = true
@@ -111,30 +125,41 @@ position = Vector2(0, -14)
 rotation = -1.5708
 
 [node name="LeftShot" type="Node2D" parent="Shooter"]
-position = Vector2(-10, -10)
+position = Vector2(-17, -10)
 rotation = -1.74533
 
 [node name="RightShot" type="Node2D" parent="Shooter"]
-position = Vector2(10, -10)
+position = Vector2(17, -10)
 rotation = -1.39626
 
 [node name="FocusShooter" type="Node2D" parent="."]
-visible = false
+script = ExtResource("15_gfbml")
+bullet_scene = ExtResource("18_gnee1")
+bullet_speed = 800
+shot_angle_max = 3
+
+[node name="ShotModulation" type="Timer" parent="FocusShooter"]
+wait_time = 0.05
 
 [node name="ShootTimer" type="Timer" parent="FocusShooter"]
 wait_time = 0.1
-one_shot = true
+autostart = true
 
 [node name="CenterShot" type="Node2D" parent="FocusShooter"]
 position = Vector2(0, -14)
+rotation = -1.5708
 
 [node name="LeftShot" type="Node2D" parent="FocusShooter"]
 position = Vector2(-3, -10)
+rotation = -1.5708
 
 [node name="RightShot" type="Node2D" parent="FocusShooter"]
-position = Vector2(3, -10)
+position = Vector2(3, -8)
+rotation = -1.5708
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Shooter/ShotModulation" to="Shooter" method="_on_shot_modulation_timeout"]
 [connection signal="timeout" from="Shooter/ShootTimer" to="Shooter" method="_on_shoot_timer_timeout" flags=18]
+[connection signal="timeout" from="FocusShooter/ShotModulation" to="FocusShooter" method="_on_shot_modulation_timeout"]
 [connection signal="timeout" from="FocusShooter/ShootTimer" to="FocusShooter" method="_on_shoot_timer_timeout" flags=18]
