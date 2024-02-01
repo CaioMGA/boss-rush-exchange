@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dmek2nyuv6slq" path="res://scenes/player.tscn" id="1_hmerg"]
 [ext_resource type="PackedScene" uid="uid://qsedcgegokq2" path="res://scenes/bullets/bullet_blue_round.tscn" id="2_1slwy"]
 [ext_resource type="PackedScene" uid="uid://b68wx6n7c0741" path="res://scenes/enemy-demo.tscn" id="2_tg6k0"]
-[ext_resource type="PackedScene" uid="uid://bot1ogebwgig8" path="res://scenes/bullets/bullet_pink_fast.tscn" id="4_rqvwe"]
+[ext_resource type="PackedScene" uid="uid://344wh82v858n" path="res://scenes/bullets/bullet_orange.tscn" id="4_ij8vc"]
 [ext_resource type="Script" path="res://scripts/destroyer.gd" id="5_usejr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q3mws"]
@@ -37,7 +37,7 @@ position = Vector2(222, 546)
 
 [node name="enemy-demo" parent="." instance=ExtResource("2_tg6k0")]
 position = Vector2(250, 154)
-bullet_scene = ExtResource("4_rqvwe")
+bullet_scene = ExtResource("4_ij8vc")
 rotate_speed = 20
 shooter_timer_wait_time = 0.2
 spawn_point_count = 6

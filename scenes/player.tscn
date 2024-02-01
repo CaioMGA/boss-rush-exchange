@@ -70,7 +70,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tyvgb"]
-size = Vector2(18.6667, 18.6667)
+size = Vector2(9.33333, 9.33333)
 
 [node name="Player" type="Area2D" groups=["player"]]
 script = ExtResource("1_i2l1a")
