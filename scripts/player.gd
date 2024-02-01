@@ -1,8 +1,13 @@
 extends Area2D
 
 signal player_hurt
-@export var speed = 400
+
+@export var bullet_scene = preload("res://scenes/bullets/bullet_blue_fast.tscn")
+@export var normal_speed = 400
+@export var focus_speed = 200
+var speed
 var screen_size
+var is_moving_slow = false;
 var life = 3
 
 func _ready():
@@ -11,6 +16,13 @@ func _ready():
 
 func _process(delta):
 	var velocity = Vector2.ZERO
+	
+	is_moving_slow = Input.is_action_pressed("focus_shot")
+	
+	if is_moving_slow:
+		speed = focus_speed
+	else:
+		speed = normal_speed
 	
 	if Input.is_action_pressed("move_right"):
 		velocity.x += 1;
