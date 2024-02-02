@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="GameMode" load_steps=7 format=3]
+
+[ext_resource type="PackedScene" uid="uid://cwdtqevwv6pia" path="res://scenes/enemies/bosses/boss-calm.tscn" id="1_lb5vd"]
+[ext_resource type="PackedScene" uid="uid://c3u22j8uqkvr8" path="res://scenes/enemies/bosses/boss-nerdy.tscn" id="2_8uge4"]
+[ext_resource type="PackedScene" uid="uid://bsuqdfcrffjr5" path="res://scenes/enemies/bosses/boss-tech.tscn" id="3_spmgj"]
+[ext_resource type="PackedScene" uid="uid://byfog5ieori0d" path="res://scenes/enemies/bosses/boss-angry.tscn" id="4_d02ba"]
+[ext_resource type="PackedScene" uid="uid://cimgo8cupb5yw" path="res://scenes/enemies/bosses/boss-tlb.tscn" id="5_c6aem"]
+[ext_resource type="Script" path="res://scripts/resources/GameMode.gd" id="6_4agec"]
+
+[resource]
+script = ExtResource("6_4agec")
+name = "Boss Rush"
+hp = 2
+lives = 2
+continues = 1
+has_infinite_continues = false
+bosses = [ExtResource("1_lb5vd"), ExtResource("2_8uge4"), ExtResource("3_spmgj"), ExtResource("4_d02ba"), ExtResource("5_c6aem")]

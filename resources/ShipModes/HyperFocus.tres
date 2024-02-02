@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ShipMode" load_steps=2 format=3 uid="uid://biabwdt43sldb"]
+
+[ext_resource type="Script" path="res://scripts/resources/ShipMode.gd" id="1_thuws"]
+
+[resource]
+script = ExtResource("1_thuws")
+name = "Hyper Focus"
+is_default = false
+damage_multiplier = 1.5
+score_multiplier = 0.75
+base_speed = 50
+destroy_orange_bullets = true
+destroy_pink_bullets = true
+has_duration = true
+duration = 4000
