@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cwdtqevwv6pia" path="res://scenes/enemies/bosses/boss-calm.tscn" id="6_n277b"]
 [ext_resource type="Script" path="res://scripts/controllers/GameController.gd" id="7_iwdt8"]
 [ext_resource type="Shader" path="res://shaders/background_scroll.gdshader" id="8_iuiqr"]
-[ext_resource type="Texture2D" uid="uid://g67vadu1dviy" path="res://art/backgrounds/bg-2.png" id="8_x0umb"]
+[ext_resource type="Texture2D" uid="uid://bg6vd37xjc4a0" path="res://art/backgrounds/bg-6.png" id="8_llalw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q3mws"]
 size = Vector2(87, 880)
@@ -70,7 +70,7 @@ offset_left = -50.0
 offset_top = -34.0
 offset_right = 538.0
 offset_bottom = 697.0
-texture = ExtResource("8_x0umb")
+texture = ExtResource("8_llalw")
 stretch_mode = 1
 metadata/_edit_lock_ = true
 
