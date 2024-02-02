@@ -1,16 +1,38 @@
-[gd_scene load_steps=3 format=3 uid="uid://cwdtqevwv6pia"]
+[gd_scene load_steps=5 format=3 uid="uid://cwdtqevwv6pia"]
 
+[ext_resource type="Script" path="res://scripts/Bosses/BossCalm.gd" id="1_6yvx8"]
 [ext_resource type="Texture2D" uid="uid://d0aihejwqn0ft" path="res://art/enemies/bosses/calm1.png" id="1_a8hc2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tykp5"]
 size = Vector2(51, 76)
 
-[node name="boss-calm" type="Area2D"]
+[sub_resource type="Curve2D" id="Curve2D_diusg"]
+_data = {
+"points": PackedVector2Array(-59.4641, 1.88775, 59.4641, -1.88775, -1.00002, -12.4916, 22.2487, -34.6549, -22.2487, 34.6549, 111, 14.8934, 0, 0, 0, 0, -1.00002, 40.757, 7.94597, 34.6549, -7.94597, -34.6549, -121, 11.8506, 2.11893, 0, -2.11893, 0, -1.00002, -12.4916)
+}
+point_count = 5
+
+[node name="boss-calm" type="Node2D"]
+script = ExtResource("1_6yvx8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-2.84217e-14, 2.34842e-05)
 scale = Vector2(0.181481, 0.181481)
 texture = ExtResource("1_a8hc2")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1.5, -52)
+[node name="Area2D" type="Area2D" parent="Sprite2D"]
+
+[node name="Hurtbox" type="CollisionShape2D" parent="Sprite2D/Area2D"]
+position = Vector2(8.26531, -286.531)
+scale = Vector2(5.5102, 5.5102)
 shape = SubResource("RectangleShape2D_tykp5")
+
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2(2.00002, 15)
+curve = SubResource("Curve2D_diusg")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(-1.00002, -12.4916)
+rotates = false
+
+[connection signal="area_entered" from="Sprite2D/Area2D" to="." method="_on_area_2d_area_entered"]

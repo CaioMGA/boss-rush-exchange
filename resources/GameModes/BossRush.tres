@@ -1,12 +1,19 @@
-[gd_resource type="Resource" script_class="GameMode" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="GameMode" load_steps=7 format=3 uid="uid://buexhxpxsp84g"]
 
-[ext_resource type="Script" path="res://scripts/resources/GameMode.gd" id="1_lyxxj"]
+[ext_resource type="PackedScene" uid="uid://cwdtqevwv6pia" path="res://scenes/enemies/bosses/boss-calm.tscn" id="1_o4stv"]
+[ext_resource type="Script" path="res://scripts/resources/GameMode.gd" id="1_xddd6"]
+[ext_resource type="PackedScene" uid="uid://c3u22j8uqkvr8" path="res://scenes/enemies/bosses/boss-nerdy.tscn" id="2_r0v8e"]
+[ext_resource type="PackedScene" uid="uid://bsuqdfcrffjr5" path="res://scenes/enemies/bosses/boss-tech.tscn" id="3_7xxcd"]
+[ext_resource type="PackedScene" uid="uid://byfog5ieori0d" path="res://scenes/enemies/bosses/boss-angry.tscn" id="4_y6878"]
+[ext_resource type="PackedScene" uid="uid://cimgo8cupb5yw" path="res://scenes/enemies/bosses/boss-tlb.tscn" id="5_vlduc"]
 
 [resource]
-script = ExtResource("1_lyxxj")
-name = "Stage Select"
+script = ExtResource("1_xddd6")
+name = "Boss Rush"
 hp = 2
 lives = 2
 continues = 1
-has_infinite_continues = true
-bosses = []
+has_infinite_continues = false
+bosses = [ExtResource("1_o4stv"), ExtResource("2_r0v8e"), ExtResource("3_7xxcd"), ExtResource("4_y6878"), ExtResource("5_vlduc")]
+loses_hyper_on_death = false
+score_penalty_on_death = 0

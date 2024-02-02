@@ -16,6 +16,7 @@ size = Vector2(524.5, 47.7403)
 [node name="demo" type="Node2D"]
 
 [node name="enemy-demo3" parent="." instance=ExtResource("2_tg6k0")]
+visible = false
 position = Vector2(12, 6)
 bullet_scene = ExtResource("2_1slwy")
 rotate_speed = 5
@@ -25,6 +26,7 @@ radius = 4
 bullet_speed = 200
 
 [node name="enemy-demo4" parent="." instance=ExtResource("2_tg6k0")]
+visible = false
 position = Vector2(475, 9)
 bullet_scene = ExtResource("2_1slwy")
 rotate_speed = -5
@@ -69,7 +71,7 @@ position = Vector2(244, 754)
 shape = SubResource("RectangleShape2D_4gg3g")
 
 [node name="boss-calm" parent="." instance=ExtResource("6_n277b")]
-position = Vector2(253, 100)
+position = Vector2(238, 129)
 
 [connection signal="area_entered" from="Destroyer" to="Destroyer" method="_on_area_entered"]
 
