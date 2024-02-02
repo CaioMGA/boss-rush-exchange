@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://bmi8sqnmu1utc"]
+[gd_scene load_steps=9 format=3 uid="uid://bmi8sqnmu1utc"]
 
 [ext_resource type="PackedScene" uid="uid://dmek2nyuv6slq" path="res://scenes/player.tscn" id="1_hmerg"]
 [ext_resource type="PackedScene" uid="uid://qsedcgegokq2" path="res://scenes/bullets/bullet_blue_round.tscn" id="2_1slwy"]
 [ext_resource type="PackedScene" uid="uid://b68wx6n7c0741" path="res://scenes/enemy-demo.tscn" id="2_tg6k0"]
 [ext_resource type="PackedScene" uid="uid://344wh82v858n" path="res://scenes/bullets/bullet_orange.tscn" id="4_ij8vc"]
 [ext_resource type="Script" path="res://scripts/destroyer.gd" id="5_usejr"]
+[ext_resource type="PackedScene" uid="uid://cwdtqevwv6pia" path="res://scenes/enemies/bosses/boss-calm.tscn" id="6_n277b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q3mws"]
 size = Vector2(87, 880)
@@ -36,7 +37,8 @@ bullet_speed = 200
 position = Vector2(222, 546)
 
 [node name="enemy-demo" parent="." instance=ExtResource("2_tg6k0")]
-position = Vector2(250, 154)
+visible = false
+position = Vector2(702, 116)
 bullet_scene = ExtResource("4_ij8vc")
 rotate_speed = 20
 shooter_timer_wait_time = 0.2
@@ -65,6 +67,9 @@ shape = SubResource("RectangleShape2D_q3mws")
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Destroyer"]
 position = Vector2(244, 754)
 shape = SubResource("RectangleShape2D_4gg3g")
+
+[node name="boss-calm" parent="." instance=ExtResource("6_n277b")]
+position = Vector2(253, 100)
 
 [connection signal="area_entered" from="Destroyer" to="Destroyer" method="_on_area_entered"]
 

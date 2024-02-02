@@ -1,0 +1,24 @@
+- Title Screen
+    - Play
+        - Boss Rush
+            - Difficulty Select
+                - Normal
+                - Hard
+        - Level Select
+            - Difficulty Select
+                - Normal
+                - Hard
+        - Back
+    - Settings
+        - Audio Settings
+        - VFX Settings
+        - Other Settings
+        - Back
+    - Leaderboards
+        - Normal
+                - Back
+        - Hard
+                - Back
+    - Credits
+        - Back
+    

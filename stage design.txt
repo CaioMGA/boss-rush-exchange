@@ -1,0 +1,40 @@
+Stage
+
+- Start 
+    - player already on scene
+    - background already scrolling
+    - music already playing
+    - autoshoot is disabled
+    - player cant shoot
+    - player can move
+
+- Boss intro
+    - boss enters stage
+    - boss life bar appears
+    - boss starts moving
+
+- Battle
+    - autoshoot is resumed
+    - boss and player can get damage
+
+Boss last hit
+    - music stops
+    - time slows down
+    - boss moans
+    - bullet cancel
+    - auto shoot stops
+    - player cannot shoot
+    - player can move
+
+VICTORY
+    - time speeds up to normal
+    - plays victory music
+    - show victory UI
+    - if boss rush, loads next boss immediatelly
+    - if stage selected, load stage select screen
+
+DEFEAT
+    - if stage selected, show continue screen
+        - infinite continues
+    - if boss rush, show continue screen once
+        - 1 continue
