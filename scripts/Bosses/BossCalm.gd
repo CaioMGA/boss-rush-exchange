@@ -62,16 +62,20 @@ func _process(delta):
 		var percent = entrance_eta / entrance_duration
 		sprite.global_position.y = move_toward(sprite.global_position.y, position_entrance.y, percent)
 		if percent >= 1:
-			entrance_routine_active = false
-			is_alive = true
-			remove_child(sprite)
-			$Path2D/PathFollow2D.add_child(sprite)
+			finish_entrance()
 		return
 	
 	if is_alive:
 		$Path2D/PathFollow2D.progress_ratio += delta / 10
 	
 
+func finish_entrance():
+	entrance_routine_active = false
+	is_alive = true
+	remove_child(sprite)
+	$Path2D/PathFollow2D.add_child(sprite)
+	
+	start_combat.emit()
 
-func _on_area_2d_area_entered(area):
-	print ("take some damage")
+func _on_area_2d_area_entered(_area):
+	pass

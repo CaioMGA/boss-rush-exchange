@@ -15,9 +15,13 @@ var is_moving_slow = false
 var is_focus_shooting = true
 var life = 3
 
+var can_shoot = false
+
 func _ready():
 	screen_size = get_viewport_rect().size
 	$AnimatedSprite2D.play("idle")
+	regular_shoot_timer.stop()
+	focus_shoot_timer.stop()
 
 func _process(delta):
 	var velocity = Vector2.ZERO
@@ -28,14 +32,21 @@ func _process(delta):
 		speed = focus_speed
 		if !is_focus_shooting:
 			is_focus_shooting = true
-			regular_shoot_timer.stop()
-			focus_shoot_timer.start()
 	else:
 		speed = normal_speed
 		if is_focus_shooting:
 			is_focus_shooting = false
-			regular_shoot_timer.start()
-			focus_shoot_timer.stop()
+			
+	if can_shoot :
+		if is_focus_shooting:
+			if focus_shoot_timer.is_stopped():
+				regular_shoot_timer.stop()
+				focus_shoot_timer.start()
+		else:
+			if regular_shoot_timer.is_stopped():
+				regular_shoot_timer.start()
+				focus_shoot_timer.stop()
+	
 	
 	if Input.is_action_pressed("move_right"):
 		velocity.x += 1;
@@ -66,3 +77,13 @@ func hurt():
 func _on_area_entered(area):
 	if area.is_in_group("bullets"):
 		hurt()
+
+func cease_fire():
+	can_shoot = false
+	
+func enable_shooting():
+	can_shoot = true
+
+
+func _on_game_controller_enable_shooting():
+	enable_shooting()

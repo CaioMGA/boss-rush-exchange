@@ -10,6 +10,8 @@ extends Node2D
 @export var radius = 32
 @export var bullet_speed = 50
 
+var can_shoot = false
+
 func _ready():
 	var step = 2 * PI / spawn_point_count
 
@@ -21,11 +23,15 @@ func _ready():
 		rotater.add_child(spawn_point)
 	
 	shoot_timer.wait_time = shooter_timer_wait_time
-	shoot_timer.start()
+	shoot_timer.stop()
 
 func _process(delta: float ) -> void:
-		var new_rotation = rotater.rotation_degrees + rotate_speed * delta
-		rotater.rotation_degrees = fmod(new_rotation, 360)
+	if can_shoot:
+		print("can shoot")
+		if shoot_timer.is_stopped():
+			shoot_timer.start()
+	var new_rotation = rotater.rotation_degrees + rotate_speed * delta
+	rotater.rotation_degrees = fmod(new_rotation, 360)
 
 func _on_shoot_timer_timeout():
 		for s in rotater.get_children():
@@ -34,3 +40,10 @@ func _on_shoot_timer_timeout():
 			bullet.position = s.global_position
 			bullet.rotation = s.global_rotation
 			bullet.speed = bullet_speed
+
+func enable_shooting():
+	can_shoot = true
+
+
+func _on_game_controller_enable_shooting():
+	enable_shooting()
