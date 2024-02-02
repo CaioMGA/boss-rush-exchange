@@ -16,8 +16,8 @@
 [ext_resource type="Texture2D" uid="uid://u76jto25ys67" path="res://art/hero/bank_right/4.png" id="9_ackem"]
 [ext_resource type="Script" path="res://scripts/player_shooter.gd" id="15_gfbml"]
 [ext_resource type="Texture2D" uid="uid://bqelhxlpxyhfl" path="res://art/hero/core.png" id="15_pcla6"]
-[ext_resource type="PackedScene" uid="uid://cuvdwcq4i27e5" path="res://scenes/bullets/bullet_green_fast.tscn" id="16_y3xot"]
-[ext_resource type="PackedScene" uid="uid://bot1ogebwgig8" path="res://scenes/bullets/bullet_pink_fast.tscn" id="18_gnee1"]
+[ext_resource type="PackedScene" path="res://scenes/bullets/bullet_green_fast.tscn" id="16_y3xot"]
+[ext_resource type="PackedScene" path="res://scenes/bullets/bullet_pink_fast.tscn" id="18_gnee1"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2tbsi"]
 animations = [{

@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://dkr3mkisi8dvu"]
+[gd_scene load_steps=4 format=3]
 
-[ext_resource type="Script" path="res://scenes/bullets/bullet.gd" id="1_eh58x"]
+[ext_resource type="Script" path="res://scripts/bullet.gd" id="1_eh58x"]
 [ext_resource type="Texture2D" uid="uid://dgsmwppmg42kr" path="res://art/bullets/pink_fast.png" id="2_id5sm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_75y3y"]

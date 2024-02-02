@@ -1,12 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://bmi8sqnmu1utc"]
+[gd_scene load_steps=12 format=3 uid="uid://c467reyj5vaai"]
 
 [ext_resource type="PackedScene" uid="uid://dmek2nyuv6slq" path="res://scenes/player.tscn" id="1_hmerg"]
-[ext_resource type="PackedScene" uid="uid://qsedcgegokq2" path="res://scenes/bullets/bullet_blue_round.tscn" id="2_1slwy"]
-[ext_resource type="PackedScene" uid="uid://b68wx6n7c0741" path="res://scenes/enemy-demo.tscn" id="2_tg6k0"]
-[ext_resource type="PackedScene" uid="uid://344wh82v858n" path="res://scenes/bullets/bullet_orange.tscn" id="4_ij8vc"]
+[ext_resource type="PackedScene" uid="uid://b68wx6n7c0741" path="res://scenes/enemies/enemy-demo.tscn" id="2_tg6k0"]
+[ext_resource type="PackedScene" path="res://scenes/bullets/bullet_orange.tscn" id="4_ij8vc"]
 [ext_resource type="Script" path="res://scripts/destroyer.gd" id="5_usejr"]
 [ext_resource type="PackedScene" uid="uid://cwdtqevwv6pia" path="res://scenes/enemies/bosses/boss-calm.tscn" id="6_n277b"]
 [ext_resource type="Script" path="res://scripts/controllers/GameController.gd" id="7_iwdt8"]
+[ext_resource type="Shader" path="res://shaders/background_scroll.gdshader" id="8_iuiqr"]
+[ext_resource type="Texture2D" uid="uid://g67vadu1dviy" path="res://art/backgrounds/bg-2.png" id="8_x0umb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q3mws"]
 size = Vector2(87, 880)
@@ -14,30 +15,15 @@ size = Vector2(87, 880)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4gg3g"]
 size = Vector2(524.5, 47.7403)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rmfjw"]
+shader = ExtResource("8_iuiqr")
+shader_parameter/direction = Vector2(0.1, 0.4)
+shader_parameter/speed_scale = 0.1
+
 [node name="demo" type="Node2D"]
 
 [node name="GameController" type="Node" parent="."]
 script = ExtResource("7_iwdt8")
-
-[node name="enemy-demo3" parent="." instance=ExtResource("2_tg6k0")]
-visible = false
-position = Vector2(12, 6)
-bullet_scene = ExtResource("2_1slwy")
-rotate_speed = 5
-shooter_timer_wait_time = 0.3
-spawn_point_count = 8
-radius = 4
-bullet_speed = 200
-
-[node name="enemy-demo4" parent="." instance=ExtResource("2_tg6k0")]
-visible = false
-position = Vector2(475, 9)
-bullet_scene = ExtResource("2_1slwy")
-rotate_speed = -5
-shooter_timer_wait_time = 0.3
-spawn_point_count = 8
-radius = 4
-bullet_speed = 200
 
 [node name="Player" parent="." instance=ExtResource("1_hmerg")]
 position = Vector2(222, 546)
@@ -77,8 +63,17 @@ shape = SubResource("RectangleShape2D_4gg3g")
 [node name="boss-calm" parent="." instance=ExtResource("6_n277b")]
 position = Vector2(238, 129)
 
-[connection signal="enable_shooting" from="GameController" to="enemy-demo3" method="_on_game_controller_enable_shooting"]
-[connection signal="enable_shooting" from="GameController" to="enemy-demo4" method="_on_game_controller_enable_shooting"]
+[node name="Bg" type="TextureRect" parent="."]
+z_index = -2000
+material = SubResource("ShaderMaterial_rmfjw")
+offset_left = -50.0
+offset_top = -34.0
+offset_right = 538.0
+offset_bottom = 697.0
+texture = ExtResource("8_x0umb")
+stretch_mode = 1
+metadata/_edit_lock_ = true
+
 [connection signal="enable_shooting" from="GameController" to="Player" method="_on_game_controller_enable_shooting"]
 [connection signal="area_entered" from="Destroyer" to="Destroyer" method="_on_area_entered"]
 [connection signal="start_combat" from="boss-calm" to="GameController" method="_on_bosscalm_start_combat"]

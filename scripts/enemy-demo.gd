@@ -9,6 +9,8 @@ extends Node2D
 @export var spawn_point_count = 4
 @export var radius = 32
 @export var bullet_speed = 50
+@export var bullet_scale = 1.0
+@export var bullet_lifetime = 10
 
 var can_shoot = false
 
@@ -27,7 +29,6 @@ func _ready():
 
 func _process(delta: float ) -> void:
 	if can_shoot:
-		print("can shoot")
 		if shoot_timer.is_stopped():
 			shoot_timer.start()
 	var new_rotation = rotater.rotation_degrees + rotate_speed * delta
@@ -40,10 +41,17 @@ func _on_shoot_timer_timeout():
 			bullet.position = s.global_position
 			bullet.rotation = s.global_rotation
 			bullet.speed = bullet_speed
+			bullet.scale = Vector2(bullet_scale, bullet_scale)
+			var bulletScript = bullet as Bullet
+			bulletScript.set_kill_timer_wait_time(bullet_lifetime)
 
 func enable_shooting():
 	can_shoot = true
 
 
 func _on_game_controller_enable_shooting():
+	enable_shooting()
+
+
+func _on_bosscalm_start_combat():
 	enable_shooting()
