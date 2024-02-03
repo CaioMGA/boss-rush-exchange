@@ -1,13 +1,18 @@
-[gd_scene load_steps=8 format=3 uid="uid://cqfxvxdae2ncu"]
+[gd_scene load_steps=13 format=3 uid="uid://cqhauxto40b5g"]
 
 [ext_resource type="Shader" path="res://shaders/background_scroll.gdshader" id="1_2o5cj"]
-[ext_resource type="Script" path="res://scenes/menu/TitleScreen.gd" id="1_5eyoy"]
+[ext_resource type="Script" path="res://scripts/rooms/TitleScreen.gd" id="1_5eyoy"]
 [ext_resource type="Texture2D" uid="uid://nm2yupsnkum7" path="res://art/backgrounds/bg-5.png" id="2_t18ow"]
 [ext_resource type="PackedScene" uid="uid://bfe8ik3g2d23u" path="res://scenes/player_title_screen.tscn" id="3_vvuqb"]
+[ext_resource type="PackedScene" uid="uid://c8666p48j7i7u" path="res://scenes/menu/DifficultySelect.tscn" id="5_8tg7l"]
+[ext_resource type="PackedScene" uid="uid://dhnurycqtpl0j" path="res://scenes/menu/StageSelect.tscn" id="6_ha8yv"]
+[ext_resource type="PackedScene" uid="uid://c3ns44h0tec1b" path="res://scenes/menu/About.tscn" id="7_tvtwc"]
+[ext_resource type="PackedScene" uid="uid://2jbbp4hehdrk" path="res://scenes/menu/Credits.tscn" id="8_upc13"]
+[ext_resource type="PackedScene" uid="uid://coj2vj4qxb5ll" path="res://scenes/menu/PreGameConfirmation.tscn" id="9_hyg2o"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gyr8v"]
 shader = ExtResource("1_2o5cj")
-shader_parameter/direction = Vector2(0.1, 0.4)
+shader_parameter/direction = Vector2(-1, -1)
 shader_parameter/speed_scale = 0.1
 
 [sub_resource type="Theme" id="Theme_nmb54"]
@@ -19,7 +24,7 @@ _data = {
 }
 point_count = 10
 
-[node name="TitleScreen" type="Control"]
+[node name="TitleScreen" type="Control" node_paths=PackedStringArray("menu_difficulty_select", "menu_stage_select", "menu_credits", "menu_about")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,6 +32,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5eyoy")
+menu_difficulty_select = NodePath("Difficulty Select")
+menu_stage_select = NodePath("Stage Select")
+menu_credits = NodePath("Credits")
+menu_about = NodePath("About")
 
 [node name="Bg" type="TextureRect" parent="."]
 z_index = -2000
@@ -44,15 +53,23 @@ metadata/_edit_lock_ = true
 clip_contents = false
 layout_direction = 3
 layout_mode = 0
+offset_left = 15.0
 offset_top = 106.0
-offset_right = 240.0
-offset_bottom = 230.0
+offset_right = 180.0
+offset_bottom = 271.0
 theme_override_colors/default_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/normal_font_size = 40
-text = "      NUMBER
-EXCHANGES"
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/bold_font_size = 40
+theme_override_font_sizes/italics_font_size = 30
+theme_override_font_sizes/bold_italics_font_size = 40
+bbcode_enabled = true
+text = "[i][b]D[/b]anmaku[/i]
+[i][b]S[/b]peed[/i]
+[i][b]D[/b]ating[/i]"
+fit_content = true
 scroll_active = false
-autowrap_mode = 2
+autowrap_mode = 0
 meta_underlined = false
 hint_underlined = false
 language = "en"
@@ -89,19 +106,19 @@ theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 24
 text = "Stage Select"
 
-[node name="btn_settings" type="Button" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 24
-text = "Settings"
-
 [node name="btn_credits" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 24
 text = "Credits"
+
+[node name="btn_about" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "About"
 
 [node name="Path2D" type="Path2D" parent="."]
 position = Vector2(25, 0)
@@ -124,5 +141,30 @@ visible = false
 
 [node name="Core" parent="Path2D/PathFollow2D/Player/AnimatedSprite2D" index="1"]
 visible = false
+
+[node name="Difficulty Select" parent="." instance=ExtResource("5_8tg7l")]
+visible = false
+layout_mode = 1
+
+[node name="Stage Select" parent="." instance=ExtResource("6_ha8yv")]
+visible = false
+layout_mode = 1
+
+[node name="About" parent="." instance=ExtResource("7_tvtwc")]
+visible = false
+layout_mode = 1
+
+[node name="Credits" parent="." instance=ExtResource("8_upc13")]
+visible = false
+layout_mode = 1
+
+[node name="PreGameConfirmation" parent="." instance=ExtResource("9_hyg2o")]
+visible = false
+layout_mode = 1
+
+[connection signal="button_down" from="MarginContainer/VBoxContainer/btn_boss_rush" to="." method="_on_btn_boss_rush_button_down"]
+[connection signal="button_down" from="MarginContainer/VBoxContainer/btn_stage_select" to="." method="_on_btn_stage_select_button_down"]
+[connection signal="button_down" from="MarginContainer/VBoxContainer/btn_credits" to="." method="_on_btn_credits_button_down"]
+[connection signal="button_down" from="MarginContainer/VBoxContainer/btn_about" to="." method="_on_btn_about_button_down"]
 
 [editable path="Path2D/PathFollow2D/Player"]

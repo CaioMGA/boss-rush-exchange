@@ -1,0 +1,94 @@
+[gd_scene load_steps=3 format=3 uid="uid://coj2vj4qxb5ll"]
+
+[ext_resource type="Script" path="res://scripts/menu/MenuBasics.gd" id="1_73i1o"]
+
+[sub_resource type="Theme" id="Theme_nmb54"]
+
+[node name="PreGameConfirmation" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_73i1o")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+self_modulate = Color(1, 1, 1, 0.941176)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="btn_back" type="Button" parent="."]
+layout_mode = 1
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 84.0
+offset_bottom = 62.0
+theme = SubResource("Theme_nmb54")
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "Back"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -178.0
+offset_top = -90.0
+offset_right = 178.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Game Mode" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 64)
+layout_direction = 3
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/normal_font_size = 40
+text = "Stage 1"
+scroll_active = false
+autowrap_mode = 0
+meta_underlined = false
+hint_underlined = false
+language = "en"
+
+[node name="Difficulty" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 64)
+layout_direction = 3
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/normal_font_size = 40
+text = "HARD mode"
+scroll_active = false
+autowrap_mode = 0
+meta_underlined = false
+hint_underlined = false
+language = "en"
+
+[node name="Start" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "Start"
+
+[connection signal="button_down" from="btn_back" to="." method="_on_btn_back_button_down"]
+[connection signal="button_down" from="MarginContainer/VBoxContainer/Start" to="." method="_on_btn_back_button_down"]
