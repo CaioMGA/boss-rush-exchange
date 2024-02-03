@@ -128,7 +128,6 @@ curve = SubResource("Curve2D_m0umv")
 position = Vector2(109, 303)
 rotation = -1.72181
 rotates = false
-lookahead = 6.0
 
 [node name="Player" parent="Path2D/PathFollow2D" instance=ExtResource("3_vvuqb")]
 position = Vector2(25.0593, 28.0897)
