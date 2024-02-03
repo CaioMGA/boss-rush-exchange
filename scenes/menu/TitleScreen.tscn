@@ -1,0 +1,128 @@
+[gd_scene load_steps=8 format=3 uid="uid://cqfxvxdae2ncu"]
+
+[ext_resource type="Shader" path="res://shaders/background_scroll.gdshader" id="1_2o5cj"]
+[ext_resource type="Script" path="res://scenes/menu/TitleScreen.gd" id="1_5eyoy"]
+[ext_resource type="Texture2D" uid="uid://nm2yupsnkum7" path="res://art/backgrounds/bg-5.png" id="2_t18ow"]
+[ext_resource type="PackedScene" uid="uid://bfe8ik3g2d23u" path="res://scenes/player_title_screen.tscn" id="3_vvuqb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gyr8v"]
+shader = ExtResource("1_2o5cj")
+shader_parameter/direction = Vector2(0.1, 0.4)
+shader_parameter/speed_scale = 0.1
+
+[sub_resource type="Theme" id="Theme_nmb54"]
+
+[sub_resource type="Curve2D" id="Curve2D_m0umv"]
+bake_interval = 40.0
+_data = {
+"points": PackedVector2Array(6.8338, 4.36701, -6.8338, -4.36701, 109, 303, -1.93246, 0.0743254, 1.93246, -0.0743254, 124, 303, 5.34118, -5.93207, -5.34118, 5.93207, 137, 306, 0, 0, 0, 0, 120, 310, 0, 0, 0, 0, 120, 288, 0, 0, 0, 0, 109, 298, 3.41897, -6.61496, -3.41897, 6.61496, 134, 301, 5.64873, 1.93246, -5.64873, -1.93246, 136, 293, 5.50008, -5.42576, -5.50008, 5.42576, 109, 291, 0, 0, 0, 0, 109, 303)
+}
+point_count = 10
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5eyoy")
+
+[node name="Bg" type="TextureRect" parent="."]
+z_index = -2000
+material = SubResource("ShaderMaterial_gyr8v")
+layout_mode = 0
+offset_left = -50.0
+offset_top = -34.0
+offset_right = 538.0
+offset_bottom = 697.0
+texture = ExtResource("2_t18ow")
+stretch_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="Game Title" type="RichTextLabel" parent="."]
+clip_contents = false
+layout_direction = 3
+layout_mode = 0
+offset_top = 106.0
+offset_right = 240.0
+offset_bottom = 230.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/normal_font_size = 40
+text = "      NUMBER
+EXCHANGES"
+scroll_active = false
+autowrap_mode = 2
+meta_underlined = false
+hint_underlined = false
+language = "en"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_right = -34.0
+offset_bottom = 180.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="btn_boss_rush" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_nmb54")
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "Boss Rush"
+
+[node name="btn_stage_select" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "Stage Select"
+
+[node name="btn_settings" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "Settings"
+
+[node name="btn_credits" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "Credits"
+
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2(25, 0)
+curve = SubResource("Curve2D_m0umv")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(109, 303)
+rotation = -1.72181
+rotates = false
+lookahead = 6.0
+
+[node name="Player" parent="Path2D/PathFollow2D" instance=ExtResource("3_vvuqb")]
+position = Vector2(25.0593, 28.0897)
+rotation = 1.72181
+scale = Vector2(3, 3)
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" parent="Path2D/PathFollow2D/Player/AnimatedSprite2D" index="0"]
+visible = false
+
+[node name="Core" parent="Path2D/PathFollow2D/Player/AnimatedSprite2D" index="1"]
+visible = false
+
+[editable path="Path2D/PathFollow2D/Player"]
