@@ -1,6 +1,6 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=10 format=3 uid="uid://e744k2hsji7g"]
 
-[ext_resource type="Script" path="res://scripts/bullet.gd" id="1_0253c"]
+[ext_resource type="Script" path="res://scripts/misc/bullet.gd" id="1_oevnw"]
 [ext_resource type="Texture2D" uid="uid://cuqrx5lgn7g4p" path="res://art/bullets/orange/orange1.png" id="2_ivl0g"]
 [ext_resource type="Texture2D" uid="uid://n7ftl6a2letr" path="res://art/bullets/orange/orange2.png" id="3_v8fvi"]
 [ext_resource type="Texture2D" uid="uid://dkna0vub8iqg4" path="res://art/bullets/orange/orange3.png" id="4_y77it"]
@@ -37,10 +37,10 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_npvyu"]
 
 [node name="Bullet" type="Area2D" groups=["bullets"]]
-script = ExtResource("1_0253c")
+script = ExtResource("1_oevnw")
 animated = true
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["bullets"]]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_gdn6j")
 frame_progress = 0.682008

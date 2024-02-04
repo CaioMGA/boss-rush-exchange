@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bka7b4ccpto4u"]
 
-[ext_resource type="Script" path="res://scripts/IngameDebug.gd" id="1_s2khx"]
+[ext_resource type="Script" path="res://scripts/misc/IngameDebug.gd" id="1_s2khx"]
 
 [node name="Debug" type="Node" node_paths=PackedStringArray("scene_name")]
 script = ExtResource("1_s2khx")

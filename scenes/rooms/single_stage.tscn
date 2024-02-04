@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dmek2nyuv6slq" path="res://scenes/player.tscn" id="2_1cr17"]
 [ext_resource type="PackedScene" uid="uid://b68wx6n7c0741" path="res://scenes/enemies/enemy-demo.tscn" id="3_gndls"]
 [ext_resource type="PackedScene" path="res://scenes/bullets/bullet_orange.tscn" id="4_sowyn"]
-[ext_resource type="Script" path="res://scripts/destroyer.gd" id="5_vf40l"]
+[ext_resource type="Script" path="res://scripts/misc/destroyer.gd" id="5_vf40l"]
 [ext_resource type="PackedScene" uid="uid://b1rxp462pka5g" path="res://scenes/enemies/bosses/boss-nerdy.tscn" id="6_5blq0"]
 [ext_resource type="Shader" path="res://shaders/background_scroll.gdshader" id="7_n1xc1"]
 [ext_resource type="Texture2D" uid="uid://bg6vd37xjc4a0" path="res://art/backgrounds/bg-6.png" id="8_5clgt"]
@@ -77,8 +77,14 @@ metadata/_edit_lock_ = true
 
 [node name="Debug" parent="." instance=ExtResource("9_218s2")]
 
+[node name="Boss Hit" type="Button" parent="Debug/VBoxContainer2" index="3"]
+layout_mode = 2
+text = "Boss Hit"
+
 [connection signal="enable_shooting" from="GameController" to="Player" method="_on_game_controller_enable_shooting"]
 [connection signal="area_entered" from="Destroyer" to="Destroyer" method="_on_area_entered"]
 [connection signal="start_combat" from="boss-nerdy" to="GameController" method="_on_boss_start_combat"]
+[connection signal="button_down" from="Debug/VBoxContainer2/Boss Hit" to="boss-nerdy" method="on_hit"]
 
 [editable path="Player"]
+[editable path="Debug"]

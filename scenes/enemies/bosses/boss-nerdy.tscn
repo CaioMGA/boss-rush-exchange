@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b1rxp462pka5g"]
+[gd_scene load_steps=10 format=3 uid="uid://b1rxp462pka5g"]
 
 [ext_resource type="Script" path="res://scripts/Bosses/BossNerdy.gd" id="1_8vunn"]
 [ext_resource type="Texture2D" uid="uid://c2sidjnule2dy" path="res://art/enemies/bosses/nerdy1.png" id="2_hjygk"]
@@ -6,8 +6,15 @@
 [ext_resource type="PackedScene" path="res://scenes/bullets/bullet_blue_round.tscn" id="4_m8i3a"]
 [ext_resource type="PackedScene" path="res://scenes/bullets/bullet_orange.tscn" id="5_ei482"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_tykp5"]
-size = Vector2(51, 64.0002)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hp1jd"]
+height = 28.0001
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1ft67"]
+radius = 6.00002
+height = 20.0001
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o72rv"]
+size = Vector2(27.0001, 30.0001)
 
 [sub_resource type="Curve2D" id="Curve2D_diusg"]
 _data = {
@@ -15,21 +22,41 @@ _data = {
 }
 point_count = 11
 
-[node name="boss-nerdy" type="Node2D"]
+[node name="boss-nerdy" type="Node2D" node_paths=PackedStringArray("hit_flash")]
 script = ExtResource("1_8vunn")
+hit_flash = NodePath("Sprite2D/HitFlash")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+clip_children = 2
 z_index = -1000
 position = Vector2(-2.84217e-14, 2.34842e-05)
 scale = Vector2(0.181481, 0.181481)
 texture = ExtResource("2_hjygk")
 
+[node name="HitFlash" type="ColorRect" parent="Sprite2D"]
+modulate = Color(1, 1, 1, 0)
+offset_left = -149.0
+offset_top = -479.0
+offset_right = 149.0
+offset_bottom = -83.0
+
 [node name="Area2D" type="Area2D" parent="Sprite2D"]
+visible = false
 
 [node name="Hurtbox" type="CollisionShape2D" parent="Sprite2D/Area2D"]
-position = Vector2(8.26531, -253.47)
+position = Vector2(0, -363.675)
 scale = Vector2(5.5102, 5.5102)
-shape = SubResource("RectangleShape2D_tykp5")
+shape = SubResource("CapsuleShape2D_hp1jd")
+
+[node name="Hurtbox3" type="CollisionShape2D" parent="Sprite2D/Area2D"]
+position = Vector2(1.5661e-13, -253.47)
+scale = Vector2(5.5102, 5.5102)
+shape = SubResource("CapsuleShape2D_1ft67")
+
+[node name="Hurtbox2" type="CollisionShape2D" parent="Sprite2D/Area2D"]
+position = Vector2(2.75511, -148.776)
+scale = Vector2(5.5102, 5.5102)
+shape = SubResource("RectangleShape2D_o72rv")
 
 [node name="enemy-demo" parent="Sprite2D" instance=ExtResource("3_hbc4j")]
 visible = false

@@ -1,11 +1,11 @@
 [gd_scene load_steps=13 format=3 uid="uid://bu53qe6jcyqqd"]
 
+[ext_resource type="Script" path="res://scripts/rooms/boss_rush_room.gd" id="1_0ngu6"]
 [ext_resource type="Script" path="res://scripts/controllers/GameController.gd" id="1_17bj7"]
 [ext_resource type="PackedScene" uid="uid://dmek2nyuv6slq" path="res://scenes/player.tscn" id="2_4a2v7"]
 [ext_resource type="PackedScene" uid="uid://b68wx6n7c0741" path="res://scenes/enemies/enemy-demo.tscn" id="3_otvns"]
-[ext_resource type="PackedScene" path="res://scenes/bullets/bullet_orange.tscn" id="4_g2htr"]
-[ext_resource type="Script" path="res://scripts/destroyer.gd" id="5_mq6oq"]
-[ext_resource type="PackedScene" uid="uid://cwdtqevwv6pia" path="res://scenes/enemies/bosses/boss-calm.tscn" id="6_rpe5s"]
+[ext_resource type="PackedScene" uid="uid://e744k2hsji7g" path="res://scenes/bullets/bullet_orange.tscn" id="4_g2htr"]
+[ext_resource type="Script" path="res://scripts/misc/destroyer.gd" id="5_mq6oq"]
 [ext_resource type="Shader" path="res://shaders/background_scroll.gdshader" id="7_m5h20"]
 [ext_resource type="Texture2D" uid="uid://g67vadu1dviy" path="res://art/backgrounds/bg-2.png" id="8_14drq"]
 [ext_resource type="PackedScene" uid="uid://bka7b4ccpto4u" path="res://scenes/menu/debug.tscn" id="9_ce1wc"]
@@ -21,7 +21,9 @@ shader = ExtResource("7_m5h20")
 shader_parameter/direction = Vector2(0.1, 0.4)
 shader_parameter/speed_scale = 0.1
 
-[node name="Boss Rush Scene" type="Node2D"]
+[node name="Boss Rush Scene" type="Node2D" node_paths=PackedStringArray("boss_spawn_point")]
+script = ExtResource("1_0ngu6")
+boss_spawn_point = NodePath("BossSpawnPoint")
 
 [node name="GameController" type="Node" parent="."]
 script = ExtResource("1_17bj7")
@@ -61,9 +63,6 @@ shape = SubResource("RectangleShape2D_q3mws")
 position = Vector2(244, 754)
 shape = SubResource("RectangleShape2D_4gg3g")
 
-[node name="boss-calm" parent="." instance=ExtResource("6_rpe5s")]
-position = Vector2(238, 129)
-
 [node name="Bg" type="TextureRect" parent="."]
 z_index = -2000
 material = SubResource("ShaderMaterial_rmfjw")
@@ -77,8 +76,12 @@ metadata/_edit_lock_ = true
 
 [node name="Debug" parent="." instance=ExtResource("9_ce1wc")]
 
+[node name="BossSpawnPoint" type="Node2D" parent="."]
+position = Vector2(240, 100)
+
 [connection signal="enable_shooting" from="GameController" to="Player" method="_on_game_controller_enable_shooting"]
 [connection signal="area_entered" from="Destroyer" to="Destroyer" method="_on_area_entered"]
-[connection signal="start_combat" from="boss-calm" to="GameController" method="_on_boss_start_combat"]
+[connection signal="button_down" from="Debug/VBoxContainer/Next Boss" to="." method="load_next_boss"]
 
 [editable path="Player"]
+[editable path="Debug"]

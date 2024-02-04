@@ -39,7 +39,6 @@ func _ready():
 
 func _process(delta: float ) -> void:
 	if waiting_delay :
-		print("waiting")
 		return
 			
 	if can_shoot:

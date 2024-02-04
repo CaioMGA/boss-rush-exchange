@@ -1,13 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://cwdtqevwv6pia"]
+[gd_scene load_steps=9 format=3 uid="uid://cwdtqevwv6pia"]
 
 [ext_resource type="Script" path="res://scripts/Bosses/BossCalm.gd" id="1_6yvx8"]
 [ext_resource type="Texture2D" uid="uid://d0aihejwqn0ft" path="res://art/enemies/bosses/calm1.png" id="1_a8hc2"]
 [ext_resource type="PackedScene" uid="uid://b68wx6n7c0741" path="res://scenes/enemies/enemy-demo.tscn" id="3_ag0ge"]
-[ext_resource type="PackedScene" path="res://scenes/bullets/bullet_blue_round.tscn" id="4_bb5ig"]
-[ext_resource type="PackedScene" path="res://scenes/bullets/bullet_orange.tscn" id="5_gjj1u"]
+[ext_resource type="PackedScene" uid="uid://4hg0pjrklssf" path="res://scenes/bullets/bullet_blue_round.tscn" id="4_bb5ig"]
+[ext_resource type="PackedScene" uid="uid://e744k2hsji7g" path="res://scenes/bullets/bullet_orange.tscn" id="5_gjj1u"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_tykp5"]
-size = Vector2(51, 76)
+[sub_resource type="CircleShape2D" id="CircleShape2D_e0mr4"]
+radius = 15.0001
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tb1n4"]
+size = Vector2(46.0002, 38.0001)
 
 [sub_resource type="Curve2D" id="Curve2D_diusg"]
 _data = {
@@ -15,21 +18,36 @@ _data = {
 }
 point_count = 5
 
-[node name="boss-calm" type="Node2D"]
+[node name="boss-calm" type="Node2D" node_paths=PackedStringArray("hit_flash")]
 script = ExtResource("1_6yvx8")
+hit_flash = NodePath("Sprite2D/HitFlash")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+clip_children = 2
 z_index = -1000
 position = Vector2(-2.84217e-14, 2.34842e-05)
 scale = Vector2(0.181481, 0.181481)
 texture = ExtResource("1_a8hc2")
 
+[node name="HitFlash" type="ColorRect" parent="Sprite2D"]
+modulate = Color(1, 1, 1, 0)
+offset_left = -149.0
+offset_top = -612.0
+offset_right = 149.0
+offset_bottom = -83.0
+
 [node name="Area2D" type="Area2D" parent="Sprite2D"]
+visible = false
 
 [node name="Hurtbox" type="CollisionShape2D" parent="Sprite2D/Area2D"]
-position = Vector2(8.26531, -286.531)
+position = Vector2(11.0204, -396.736)
 scale = Vector2(5.5102, 5.5102)
-shape = SubResource("RectangleShape2D_tykp5")
+shape = SubResource("CircleShape2D_e0mr4")
+
+[node name="Hurtbox2" type="CollisionShape2D" parent="Sprite2D/Area2D"]
+position = Vector2(5.51022, -192.858)
+scale = Vector2(5.5102, 5.5102)
+shape = SubResource("RectangleShape2D_tb1n4")
 
 [node name="enemy-demo" parent="Sprite2D" instance=ExtResource("3_ag0ge")]
 visible = false
