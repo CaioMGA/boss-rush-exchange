@@ -1,17 +1,17 @@
 [gd_scene load_steps=13 format=3 uid="uid://cqhauxto40b5g"]
 
-[ext_resource type="Shader" path="res://shaders/background_scroll.gdshader" id="1_2o5cj"]
-[ext_resource type="Script" path="res://scripts/rooms/TitleScreen.gd" id="1_5eyoy"]
-[ext_resource type="Texture2D" uid="uid://nm2yupsnkum7" path="res://art/backgrounds/bg-5.png" id="2_t18ow"]
-[ext_resource type="PackedScene" uid="uid://bfe8ik3g2d23u" path="res://scenes/player_title_screen.tscn" id="3_vvuqb"]
-[ext_resource type="PackedScene" uid="uid://c8666p48j7i7u" path="res://scenes/menu/DifficultySelect.tscn" id="5_8tg7l"]
-[ext_resource type="PackedScene" uid="uid://dhnurycqtpl0j" path="res://scenes/menu/StageSelect.tscn" id="6_ha8yv"]
-[ext_resource type="PackedScene" uid="uid://c3ns44h0tec1b" path="res://scenes/menu/About.tscn" id="7_tvtwc"]
-[ext_resource type="PackedScene" uid="uid://2jbbp4hehdrk" path="res://scenes/menu/Credits.tscn" id="8_upc13"]
-[ext_resource type="PackedScene" uid="uid://coj2vj4qxb5ll" path="res://scenes/menu/PreGameConfirmation.tscn" id="9_hyg2o"]
+[ext_resource type="Script" path="res://scripts/rooms/TitleScreen.gd" id="1_0elyr"]
+[ext_resource type="Shader" path="res://shaders/background_scroll.gdshader" id="2_fcyoc"]
+[ext_resource type="Texture2D" uid="uid://nm2yupsnkum7" path="res://art/backgrounds/bg-5.png" id="3_v6rwa"]
+[ext_resource type="PackedScene" uid="uid://bfe8ik3g2d23u" path="res://scenes/player_title_screen.tscn" id="4_tv1ry"]
+[ext_resource type="PackedScene" uid="uid://dhnurycqtpl0j" path="res://scenes/menu/StageSelect.tscn" id="5_7q84h"]
+[ext_resource type="PackedScene" uid="uid://c3ns44h0tec1b" path="res://scenes/menu/About.tscn" id="6_ttfvg"]
+[ext_resource type="PackedScene" uid="uid://2jbbp4hehdrk" path="res://scenes/menu/Credits.tscn" id="7_qjgbh"]
+[ext_resource type="PackedScene" uid="uid://c8666p48j7i7u" path="res://scenes/menu/DifficultySelect.tscn" id="8_t6rah"]
+[ext_resource type="PackedScene" uid="uid://coj2vj4qxb5ll" path="res://scenes/menu/PreGameConfirmation.tscn" id="9_vqal2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gyr8v"]
-shader = ExtResource("1_2o5cj")
+shader = ExtResource("2_fcyoc")
 shader_parameter/direction = Vector2(-1, -1)
 shader_parameter/speed_scale = 0.1
 
@@ -24,18 +24,20 @@ _data = {
 }
 point_count = 10
 
-[node name="TitleScreen" type="Control" node_paths=PackedStringArray("menu_difficulty_select", "menu_stage_select", "menu_credits", "menu_about")]
+[node name="TitleScreen" type="Control" node_paths=PackedStringArray("menu_difficulty_select", "menu_stage_select", "menu_credits", "menu_about", "menu_pregame")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_5eyoy")
+script = ExtResource("1_0elyr")
 menu_difficulty_select = NodePath("Difficulty Select")
 menu_stage_select = NodePath("Stage Select")
 menu_credits = NodePath("Credits")
 menu_about = NodePath("About")
+menu_pregame = NodePath("PreGameConfirmation")
+metadata/_edit_lock_ = true
 
 [node name="Bg" type="TextureRect" parent="."]
 z_index = -2000
@@ -45,7 +47,7 @@ offset_left = -50.0
 offset_top = -34.0
 offset_right = 538.0
 offset_bottom = 697.0
-texture = ExtResource("2_t18ow")
+texture = ExtResource("3_v6rwa")
 stretch_mode = 1
 metadata/_edit_lock_ = true
 
@@ -73,6 +75,7 @@ autowrap_mode = 0
 meta_underlined = false
 hint_underlined = false
 language = "en"
+metadata/_edit_lock_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -86,6 +89,7 @@ offset_right = -34.0
 offset_bottom = 180.0
 grow_horizontal = 0
 grow_vertical = 2
+metadata/_edit_lock_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
@@ -123,13 +127,14 @@ text = "About"
 [node name="Path2D" type="Path2D" parent="."]
 position = Vector2(25, 0)
 curve = SubResource("Curve2D_m0umv")
+metadata/_edit_lock_ = true
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
 position = Vector2(109, 303)
 rotation = -1.72181
 rotates = false
 
-[node name="Player" parent="Path2D/PathFollow2D" instance=ExtResource("3_vvuqb")]
+[node name="Player" parent="Path2D/PathFollow2D" instance=ExtResource("4_tv1ry")]
 position = Vector2(25.0593, 28.0897)
 rotation = 1.72181
 scale = Vector2(3, 3)
@@ -141,29 +146,48 @@ visible = false
 [node name="Core" parent="Path2D/PathFollow2D/Player/AnimatedSprite2D" index="1"]
 visible = false
 
-[node name="Difficulty Select" parent="." instance=ExtResource("5_8tg7l")]
+[node name="Stage Select" parent="." instance=ExtResource("5_7q84h")]
 visible = false
 layout_mode = 1
+metadata/_edit_lock_ = true
 
-[node name="Stage Select" parent="." instance=ExtResource("6_ha8yv")]
-visible = false
-layout_mode = 1
+[node name="MarginContainer" parent="Stage Select" index="3"]
+metadata/_edit_lock_ = true
 
-[node name="About" parent="." instance=ExtResource("7_tvtwc")]
+[node name="About" parent="." instance=ExtResource("6_ttfvg")]
 visible = false
 layout_mode = 1
+metadata/_edit_lock_ = true
 
-[node name="Credits" parent="." instance=ExtResource("8_upc13")]
+[node name="Credits" parent="." instance=ExtResource("7_qjgbh")]
 visible = false
 layout_mode = 1
+metadata/_edit_lock_ = true
 
-[node name="PreGameConfirmation" parent="." instance=ExtResource("9_hyg2o")]
+[node name="Difficulty Select" parent="." instance=ExtResource("8_t6rah")]
 visible = false
 layout_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="PreGameConfirmation" parent="." instance=ExtResource("9_vqal2")]
+visible = false
+layout_mode = 1
+metadata/_edit_lock_ = true
 
 [connection signal="button_down" from="MarginContainer/VBoxContainer/btn_boss_rush" to="." method="_on_btn_boss_rush_button_down"]
 [connection signal="button_down" from="MarginContainer/VBoxContainer/btn_stage_select" to="." method="_on_btn_stage_select_button_down"]
 [connection signal="button_down" from="MarginContainer/VBoxContainer/btn_credits" to="." method="_on_btn_credits_button_down"]
 [connection signal="button_down" from="MarginContainer/VBoxContainer/btn_about" to="." method="_on_btn_about_button_down"]
+[connection signal="button_down" from="Stage Select/MarginContainer/VBoxContainer/btn_stage_1" to="." method="_on_btn_stage_button_down" binds= [1]]
+[connection signal="button_down" from="Stage Select/MarginContainer/VBoxContainer/btn_stage_2" to="." method="_on_btn_stage_button_down" binds= [2]]
+[connection signal="button_down" from="Stage Select/MarginContainer/VBoxContainer/btn_stage_3" to="." method="_on_btn_stage_button_down" binds= [3]]
+[connection signal="button_down" from="Stage Select/MarginContainer/VBoxContainer/btn_stage_4" to="." method="_on_btn_stage_button_down" binds= [4]]
+[connection signal="button_down" from="Stage Select/MarginContainer/VBoxContainer/btn_stage_5" to="." method="_on_btn_stage_button_down" binds= [5]]
+[connection signal="button_down" from="Difficulty Select/MarginContainer/VBoxContainer/btn_normal_mode" to="." method="_on_btn_normal_mode_button_down"]
+[connection signal="button_down" from="Difficulty Select/MarginContainer/VBoxContainer/btn_hard_mode" to="." method="_on_btn_hard_mode_button_down"]
+[connection signal="button_down" from="PreGameConfirmation/MarginContainer/VBoxContainer/Start" to="." method="_on_pregame_start_button_down"]
 
 [editable path="Path2D/PathFollow2D/Player"]
+[editable path="Stage Select"]
+[editable path="Difficulty Select"]
+[editable path="PreGameConfirmation"]

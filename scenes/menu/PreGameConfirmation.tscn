@@ -4,7 +4,7 @@
 
 [sub_resource type="Theme" id="Theme_nmb54"]
 
-[node name="PreGameConfirmation" type="Control"]
+[node name="PreGameConfirmation" type="Control" node_paths=PackedStringArray("game_mode_label", "difficulty_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,9 +12,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_73i1o")
+game_mode_label = NodePath("MarginContainer/VBoxContainer/Game Mode")
+difficulty_label = NodePath("MarginContainer/VBoxContainer/Difficulty")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-self_modulate = Color(1, 1, 1, 0.941176)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -91,4 +92,3 @@ theme_override_font_sizes/font_size = 60
 text = "Start"
 
 [connection signal="button_down" from="btn_back" to="." method="_on_btn_back_button_down"]
-[connection signal="button_down" from="MarginContainer/VBoxContainer/Start" to="." method="_on_btn_back_button_down"]
