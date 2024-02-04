@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bu53qe6jcyqqd"]
+[gd_scene load_steps=13 format=3 uid="uid://bu53qe6jcyqqd"]
 
 [ext_resource type="Script" path="res://scripts/controllers/GameController.gd" id="1_17bj7"]
 [ext_resource type="PackedScene" uid="uid://dmek2nyuv6slq" path="res://scenes/player.tscn" id="2_4a2v7"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cwdtqevwv6pia" path="res://scenes/enemies/bosses/boss-calm.tscn" id="6_rpe5s"]
 [ext_resource type="Shader" path="res://shaders/background_scroll.gdshader" id="7_m5h20"]
 [ext_resource type="Texture2D" uid="uid://g67vadu1dviy" path="res://art/backgrounds/bg-2.png" id="8_14drq"]
+[ext_resource type="PackedScene" uid="uid://bka7b4ccpto4u" path="res://scenes/menu/debug.tscn" id="9_ce1wc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q3mws"]
 size = Vector2(87, 880)
@@ -20,7 +21,7 @@ shader = ExtResource("7_m5h20")
 shader_parameter/direction = Vector2(0.1, 0.4)
 shader_parameter/speed_scale = 0.1
 
-[node name="demo" type="Node2D"]
+[node name="Boss Rush Scene" type="Node2D"]
 
 [node name="GameController" type="Node" parent="."]
 script = ExtResource("1_17bj7")
@@ -74,8 +75,10 @@ texture = ExtResource("8_14drq")
 stretch_mode = 1
 metadata/_edit_lock_ = true
 
+[node name="Debug" parent="." instance=ExtResource("9_ce1wc")]
+
 [connection signal="enable_shooting" from="GameController" to="Player" method="_on_game_controller_enable_shooting"]
 [connection signal="area_entered" from="Destroyer" to="Destroyer" method="_on_area_entered"]
-[connection signal="start_combat" from="boss-calm" to="GameController" method="_on_bosscalm_start_combat"]
+[connection signal="start_combat" from="boss-calm" to="GameController" method="_on_boss_start_combat"]
 
 [editable path="Player"]

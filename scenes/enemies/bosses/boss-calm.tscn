@@ -50,6 +50,7 @@ scale = Vector2(5.5102, 5.5102)
 bullet_scene = ExtResource("5_gjj1u")
 rotate_speed = 0
 shooter_timer_wait_time = 1.0
+shooter_delay_timer_wait_time = 0.5
 spawn_point_count = 16
 radius = 4
 bullet_speed = 200
@@ -74,7 +75,7 @@ curve = SubResource("Curve2D_diusg")
 position = Vector2(-1.00002, -12.4916)
 rotates = false
 
-[connection signal="start_combat" from="." to="Sprite2D/enemy-demo" method="_on_bosscalm_start_combat"]
-[connection signal="start_combat" from="." to="Sprite2D/Heart Shooter" method="_on_bosscalm_start_combat"]
-[connection signal="start_combat" from="." to="Sprite2D/enemy-demo2" method="_on_bosscalm_start_combat"]
+[connection signal="start_combat" from="." to="Sprite2D/enemy-demo" method="_on_boss_start_combat"]
+[connection signal="start_combat" from="." to="Sprite2D/Heart Shooter" method="_on_boss_start_combat"]
+[connection signal="start_combat" from="." to="Sprite2D/enemy-demo2" method="_on_boss_start_combat"]
 [connection signal="area_entered" from="Sprite2D/Area2D" to="." method="_on_area_2d_area_entered"]

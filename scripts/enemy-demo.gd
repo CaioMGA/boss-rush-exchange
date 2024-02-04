@@ -2,19 +2,25 @@ extends Node2D
 
 @export var bullet_scene = preload("res://scenes/bullets/bullet_pink_round.tscn")
 @onready var shoot_timer = $ShootTimer
+@onready var delay_timer = $DelayTimer
 @onready var rotater = $Rotater
 
 @export var rotate_speed = 35
 @export var shooter_timer_wait_time = 0.08
+@export var shooter_delay_timer_wait_time = 0.0
 @export var spawn_point_count = 4
 @export var radius = 32
 @export var bullet_speed = 50
 @export var bullet_scale = 1.0
 @export var bullet_lifetime = 10
 
+var waiting_delay = false
 var can_shoot = false
 
 func _ready():
+	if shooter_delay_timer_wait_time > 0:
+		waiting_delay = true
+		
 	var step = 2 * PI / spawn_point_count
 
 	for i in range(spawn_point_count):
@@ -26,8 +32,16 @@ func _ready():
 	
 	shoot_timer.wait_time = shooter_timer_wait_time
 	shoot_timer.stop()
+	
+	if waiting_delay:
+		delay_timer.wait_time = shooter_delay_timer_wait_time
+		delay_timer.start()
 
 func _process(delta: float ) -> void:
+	if waiting_delay :
+		print("waiting")
+		return
+			
 	if can_shoot:
 		if shoot_timer.is_stopped():
 			shoot_timer.start()
@@ -52,6 +66,9 @@ func enable_shooting():
 func _on_game_controller_enable_shooting():
 	enable_shooting()
 
+func _on_delay_shooter_timer_timeout():
+	waiting_delay = false
 
-func _on_bosscalm_start_combat():
+
+func _on_boss_start_combat():
 	enable_shooting()

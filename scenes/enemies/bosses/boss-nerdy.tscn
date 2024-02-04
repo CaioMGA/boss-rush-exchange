@@ -1,16 +1,92 @@
-[gd_scene load_steps=3 format=3 uid="uid://c3u22j8uqkvr8"]
+[gd_scene load_steps=8 format=3 uid="uid://b1rxp462pka5g"]
 
-[ext_resource type="Texture2D" uid="uid://d0aihejwqn0ft" path="res://art/enemies/bosses/calm1.png" id="1_mhrk5"]
+[ext_resource type="Script" path="res://scripts/Bosses/BossNerdy.gd" id="1_8vunn"]
+[ext_resource type="Texture2D" uid="uid://c2sidjnule2dy" path="res://art/enemies/bosses/nerdy1.png" id="2_hjygk"]
+[ext_resource type="PackedScene" uid="uid://b68wx6n7c0741" path="res://scenes/enemies/enemy-demo.tscn" id="3_hbc4j"]
+[ext_resource type="PackedScene" path="res://scenes/bullets/bullet_blue_round.tscn" id="4_m8i3a"]
+[ext_resource type="PackedScene" path="res://scenes/bullets/bullet_orange.tscn" id="5_ei482"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tykp5"]
-size = Vector2(51, 76)
+size = Vector2(51, 64.0002)
 
-[node name="boss-calm" type="Area2D"]
+[sub_resource type="Curve2D" id="Curve2D_diusg"]
+_data = {
+"points": PackedVector2Array(-59.4641, 1.88775, 59.4641, -1.88775, -1.00002, -12.4916, 22.2487, -34.6549, -22.2487, 34.6549, 111, 14.8934, 0, 0, 0, 0, 98, 40, 43, 2, -43, -2, 74, 212, 0, 0, 0, 0, 48, 42, 0, 0, 0, 0, -1.00002, 40.757, 0, 0, 0, 0, -34, 40, 44, 0, -44, 0, -69, 209, 0, 0, 0, 0, -93, 42, 7.94597, 34.6549, -7.94597, -34.6549, -122, 13, 2.11893, 0, -2.11893, 0, -1.00002, -12.4916)
+}
+point_count = 11
+
+[node name="boss-nerdy" type="Node2D"]
+script = ExtResource("1_8vunn")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1000
+position = Vector2(-2.84217e-14, 2.34842e-05)
 scale = Vector2(0.181481, 0.181481)
-texture = ExtResource("1_mhrk5")
+texture = ExtResource("2_hjygk")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1.5, -52)
+[node name="Area2D" type="Area2D" parent="Sprite2D"]
+
+[node name="Hurtbox" type="CollisionShape2D" parent="Sprite2D/Area2D"]
+position = Vector2(8.26531, -253.47)
+scale = Vector2(5.5102, 5.5102)
 shape = SubResource("RectangleShape2D_tykp5")
+
+[node name="enemy-demo" parent="Sprite2D" instance=ExtResource("3_hbc4j")]
+visible = false
+position = Vector2(-500, -150)
+scale = Vector2(5.5102, 5.5102)
+bullet_scene = ExtResource("4_m8i3a")
+rotate_speed = 0
+shooter_timer_wait_time = 0.5
+spawn_point_count = 7
+radius = 4
+bullet_speed = 300
+bullet_scale = 0.7
+
+[node name="Orange Shooter" parent="Sprite2D" instance=ExtResource("3_hbc4j")]
+position = Vector2(-325.103, -148.776)
+scale = Vector2(5.5102, 5.5102)
+bullet_scene = ExtResource("5_ei482")
+rotate_speed = 0
+shooter_timer_wait_time = 2.0
+spawn_point_count = 16
+radius = 4
+bullet_speed = 200
+bullet_lifetime = 20
+
+[node name="Orange Shooter 2" parent="Sprite2D" instance=ExtResource("3_hbc4j")]
+position = Vector2(325.103, -148.776)
+scale = Vector2(5.5102, 5.5102)
+bullet_scene = ExtResource("5_ei482")
+rotate_speed = 0
+shooter_timer_wait_time = 2.0
+shooter_delay_timer_wait_time = 1.0
+spawn_point_count = 16
+radius = 4
+bullet_speed = 200
+bullet_lifetime = 20
+
+[node name="enemy-demo2" parent="Sprite2D" instance=ExtResource("3_hbc4j")]
+visible = false
+position = Vector2(500, -150)
+scale = Vector2(5.5102, 5.5102)
+rotate_speed = 0
+shooter_timer_wait_time = 0.5
+spawn_point_count = 7
+radius = 4
+bullet_speed = 300
+bullet_scale = 0.7
+
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2(2.00002, 15)
+curve = SubResource("Curve2D_diusg")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(-1.00002, -12.4916)
+rotates = false
+
+[connection signal="start_combat" from="." to="Sprite2D/enemy-demo" method="_on_boss_start_combat"]
+[connection signal="start_combat" from="." to="Sprite2D/Orange Shooter" method="_on_boss_start_combat"]
+[connection signal="start_combat" from="." to="Sprite2D/Orange Shooter 2" method="_on_boss_start_combat"]
+[connection signal="start_combat" from="." to="Sprite2D/enemy-demo2" method="_on_boss_start_combat"]
+[connection signal="area_entered" from="Sprite2D/Area2D" to="." method="_on_area_2d_area_entered"]

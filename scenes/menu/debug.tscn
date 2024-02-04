@@ -1,0 +1,56 @@
+[gd_scene load_steps=2 format=3 uid="uid://bka7b4ccpto4u"]
+
+[ext_resource type="Script" path="res://scripts/IngameDebug.gd" id="1_s2khx"]
+
+[node name="Debug" type="Node" node_paths=PackedStringArray("scene_name")]
+script = ExtResource("1_s2khx")
+scene_name = NodePath("VBoxContainer2/Scene Name")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_right = 96.0
+offset_bottom = 136.0
+
+[node name="Next Phase" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Next Phase"
+
+[node name="Victory" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Victory"
+
+[node name="Defeat" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Defeat"
+
+[node name="Next Boss" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Next Boss"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -89.0
+offset_right = -4.0
+offset_bottom = 136.0
+grow_horizontal = 0
+
+[node name="Scene Name" type="RichTextLabel" parent="VBoxContainer2"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "scene"
+
+[node name="Back" type="Button" parent="VBoxContainer2"]
+layout_mode = 2
+text = "Back"
+
+[node name="Restart" type="Button" parent="VBoxContainer2"]
+layout_mode = 2
+text = "Restart"
+
+[connection signal="button_down" from="VBoxContainer/Next Phase" to="." method="_on_next_phase_button_down"]
+[connection signal="button_down" from="VBoxContainer/Victory" to="." method="_on_victory_button_down"]
+[connection signal="button_down" from="VBoxContainer/Defeat" to="." method="_on_defeat_button_down"]
+[connection signal="button_down" from="VBoxContainer/Next Boss" to="." method="_on_next_boss_button_down"]
+[connection signal="button_down" from="VBoxContainer2/Back" to="." method="_on_back_button_down"]
+[connection signal="button_down" from="VBoxContainer2/Restart" to="." method="_on_restart_button_down"]

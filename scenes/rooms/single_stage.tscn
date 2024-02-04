@@ -1,13 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://ctetsf4hmxk81"]
+[gd_scene load_steps=13 format=3 uid="uid://ctetsf4hmxk81"]
 
 [ext_resource type="Script" path="res://scripts/controllers/GameController.gd" id="1_e0y0a"]
 [ext_resource type="PackedScene" uid="uid://dmek2nyuv6slq" path="res://scenes/player.tscn" id="2_1cr17"]
 [ext_resource type="PackedScene" uid="uid://b68wx6n7c0741" path="res://scenes/enemies/enemy-demo.tscn" id="3_gndls"]
 [ext_resource type="PackedScene" path="res://scenes/bullets/bullet_orange.tscn" id="4_sowyn"]
 [ext_resource type="Script" path="res://scripts/destroyer.gd" id="5_vf40l"]
-[ext_resource type="PackedScene" uid="uid://cwdtqevwv6pia" path="res://scenes/enemies/bosses/boss-calm.tscn" id="6_ehglu"]
+[ext_resource type="PackedScene" uid="uid://b1rxp462pka5g" path="res://scenes/enemies/bosses/boss-nerdy.tscn" id="6_5blq0"]
 [ext_resource type="Shader" path="res://shaders/background_scroll.gdshader" id="7_n1xc1"]
 [ext_resource type="Texture2D" uid="uid://bg6vd37xjc4a0" path="res://art/backgrounds/bg-6.png" id="8_5clgt"]
+[ext_resource type="PackedScene" uid="uid://bka7b4ccpto4u" path="res://scenes/menu/debug.tscn" id="9_218s2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q3mws"]
 size = Vector2(87, 880)
@@ -60,8 +61,8 @@ shape = SubResource("RectangleShape2D_q3mws")
 position = Vector2(244, 754)
 shape = SubResource("RectangleShape2D_4gg3g")
 
-[node name="boss-calm" parent="." instance=ExtResource("6_ehglu")]
-position = Vector2(238, 129)
+[node name="boss-nerdy" parent="." instance=ExtResource("6_5blq0")]
+position = Vector2(231, 101)
 
 [node name="Bg" type="TextureRect" parent="."]
 z_index = -2000
@@ -74,8 +75,10 @@ texture = ExtResource("8_5clgt")
 stretch_mode = 1
 metadata/_edit_lock_ = true
 
+[node name="Debug" parent="." instance=ExtResource("9_218s2")]
+
 [connection signal="enable_shooting" from="GameController" to="Player" method="_on_game_controller_enable_shooting"]
 [connection signal="area_entered" from="Destroyer" to="Destroyer" method="_on_area_entered"]
-[connection signal="start_combat" from="boss-calm" to="GameController" method="_on_bosscalm_start_combat"]
+[connection signal="start_combat" from="boss-nerdy" to="GameController" method="_on_boss_start_combat"]
 
 [editable path="Player"]
