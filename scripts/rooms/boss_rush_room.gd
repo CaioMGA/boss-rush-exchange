@@ -31,6 +31,9 @@ func destroy_boss():
 	if boss != null:
 		boss.queue_free()
 	
+	bullet_clear()
+	game_controller.cease_fire.emit()
+
+func bullet_clear():
 	game_controller.enemy_bullet_clear()
 	game_controller.player_bullet_clear()
-	game_controller.cease_fire.emit()

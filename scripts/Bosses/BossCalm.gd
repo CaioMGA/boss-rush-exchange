@@ -57,8 +57,6 @@ func enter():
 	entrance_routine_active = true
 	
 func _process(delta):
-	super._process(delta)
-	
 	if entrance_routine_active:
 		entrance_eta += delta
 		var percent = entrance_eta / entrance_duration

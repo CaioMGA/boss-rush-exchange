@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://b1rxp462pka5g"]
+[gd_scene load_steps=11 format=3 uid="uid://b1rxp462pka5g"]
 
 [ext_resource type="Script" path="res://scripts/Bosses/BossNerdy.gd" id="1_8vunn"]
 [ext_resource type="Texture2D" uid="uid://c2sidjnule2dy" path="res://art/enemies/bosses/nerdy1.png" id="2_hjygk"]
+[ext_resource type="Script" path="res://scripts/misc/HitFlash.gd" id="3_b5tlr"]
 [ext_resource type="PackedScene" uid="uid://b68wx6n7c0741" path="res://scenes/enemies/enemy-demo.tscn" id="3_hbc4j"]
-[ext_resource type="PackedScene" path="res://scenes/bullets/bullet_blue_round.tscn" id="4_m8i3a"]
-[ext_resource type="PackedScene" path="res://scenes/bullets/bullet_orange.tscn" id="5_ei482"]
+[ext_resource type="PackedScene" uid="uid://4hg0pjrklssf" path="res://scenes/bullets/bullet_blue_round.tscn" id="4_m8i3a"]
+[ext_resource type="PackedScene" uid="uid://e744k2hsji7g" path="res://scenes/bullets/bullet_orange.tscn" id="5_ei482"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hp1jd"]
 height = 28.0001
@@ -39,6 +40,7 @@ offset_left = -149.0
 offset_top = -479.0
 offset_right = 149.0
 offset_bottom = -83.0
+script = ExtResource("3_b5tlr")
 
 [node name="Area2D" type="Area2D" parent="Sprite2D"]
 visible = false

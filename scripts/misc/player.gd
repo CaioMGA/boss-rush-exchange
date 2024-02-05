@@ -1,13 +1,17 @@
 extends Area2D
 
-signal player_hurt
+class_name Player
 
-@export var bullet_scene = preload("res://scenes/bullets/bullet_blue_fast.tscn")
+signal on_player_hurt
+signal on_player_loses_life
+
 @export var normal_speed = 200
 @export var focus_speed = 100
 
 @export var regular_shoot_timer:Timer
 @export var focus_shoot_timer:Timer
+
+@export var collision_shape:CollisionShape2D
 
 var speed
 var screen_size
@@ -16,6 +20,7 @@ var is_focus_shooting = true
 var life = 3
 
 var can_shoot = false
+
 
 func _ready():
 	screen_size = get_viewport_rect().size
@@ -46,8 +51,7 @@ func _process(delta):
 			if regular_shoot_timer.is_stopped():
 				regular_shoot_timer.start()
 				focus_shoot_timer.stop()
-	
-	
+
 	if Input.is_action_pressed("move_right"):
 		velocity.x += 1;
 	if Input.is_action_pressed("move_left"):
@@ -70,9 +74,16 @@ func _process(delta):
 	position += velocity * delta
 	position = position.clamp(Vector2.ZERO, screen_size)
 
+func play_hurt_animation():
+	$AnimatedSprite2D.modulate.a = 0.5
+	#$CollisionShape2D.set_disabled(true)
+
+func play_normal_animation():
+	$AnimatedSprite2D.modulate.a = 1.0
+	#$CollisionShape2D.set_disabled(false)
 
 func hurt():
-	emit_signal("player_hurt")
+	on_player_hurt.emit()
 
 func _on_area_entered(area):
 	if area.is_in_group("bullets"):
@@ -82,14 +93,12 @@ func cease_fire():
 	can_shoot = false
 	regular_shoot_timer.stop()
 	focus_shoot_timer.stop()
-	
+
 func enable_shooting():
 	can_shoot = true
 
-
 func _on_game_controller_enable_shooting():
 	enable_shooting()
-
 
 func _on_game_controller_cease_fire():
 	pass # Replace with function body.

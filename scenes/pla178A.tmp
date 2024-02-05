@@ -74,13 +74,12 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tyvgb"]
-size = Vector2(4.66667, 4.66667)
+size = Vector2(9.33333, 9.33333)
 
-[node name="Player" type="Area2D" node_paths=PackedStringArray("regular_shoot_timer", "focus_shoot_timer", "collision_shape") groups=["player"]]
+[node name="Player" type="Area2D" node_paths=PackedStringArray("regular_shoot_timer", "focus_shoot_timer") groups=["player"]]
 script = ExtResource("1_i2l1a")
 regular_shoot_timer = NodePath("Shooter/ShootTimer")
 focus_shoot_timer = NodePath("FocusShooter/ShootTimer")
-collision_shape = NodePath("CollisionShape2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["player"]]
 clip_children = 2

@@ -164,10 +164,8 @@ metadata/_edit_lock_ = true
 [connection signal="cease_fire" from="GameController" to="Player" method="cease_fire"]
 [connection signal="enable_shooting" from="GameController" to="Player" method="_on_game_controller_enable_shooting"]
 [connection signal="must_update_ui" from="GameController/Health System" to="GameController/UI Controller" method="update_ui"]
-[connection signal="player_death" from="GameController/Health System" to="." method="bullet_clear"]
-[connection signal="player_is_hurt" from="GameController/Health System" to="." method="bullet_clear"]
-[connection signal="on_player_hurt" from="Player" to="GameController/Health System" method="hurt_player"]
 [connection signal="on_player_loses_life" from="Player" to="GameController/Health System" method="kill_player"]
+[connection signal="player_hurt" from="Player" to="GameController/Health System" method="hurt_player"]
 [connection signal="area_entered" from="Destroyer" to="Destroyer" method="_on_area_entered"]
 [connection signal="button_down" from="Debug/VBoxContainer/Next Boss" to="." method="load_next_boss"]
 

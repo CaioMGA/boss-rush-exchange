@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://cwdtqevwv6pia"]
+[gd_scene load_steps=10 format=3 uid="uid://cwdtqevwv6pia"]
 
 [ext_resource type="Script" path="res://scripts/Bosses/BossCalm.gd" id="1_6yvx8"]
 [ext_resource type="Texture2D" uid="uid://d0aihejwqn0ft" path="res://art/enemies/bosses/calm1.png" id="1_a8hc2"]
 [ext_resource type="PackedScene" uid="uid://b68wx6n7c0741" path="res://scenes/enemies/enemy-demo.tscn" id="3_ag0ge"]
+[ext_resource type="Script" path="res://scripts/misc/HitFlash.gd" id="3_c6n5s"]
 [ext_resource type="PackedScene" uid="uid://4hg0pjrklssf" path="res://scenes/bullets/bullet_blue_round.tscn" id="4_bb5ig"]
 [ext_resource type="PackedScene" uid="uid://e744k2hsji7g" path="res://scenes/bullets/bullet_orange.tscn" id="5_gjj1u"]
 
@@ -35,6 +36,7 @@ offset_left = -149.0
 offset_top = -612.0
 offset_right = 149.0
 offset_bottom = -83.0
+script = ExtResource("3_c6n5s")
 
 [node name="Area2D" type="Area2D" parent="Sprite2D"]
 visible = false
