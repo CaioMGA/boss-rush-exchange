@@ -78,6 +78,7 @@ size = Vector2(4.66667, 4.66667)
 
 [node name="Player" type="Area2D" node_paths=PackedStringArray("regular_shoot_timer", "focus_shoot_timer", "collision_shape") groups=["player"]]
 script = ExtResource("1_i2l1a")
+normal_speed = 250
 regular_shoot_timer = NodePath("Shooter/ShootTimer")
 focus_shoot_timer = NodePath("FocusShooter/ShootTimer")
 collision_shape = NodePath("CollisionShape2D")
