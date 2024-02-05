@@ -10,6 +10,7 @@ var entrance_routine_active = false
 var is_alive = false
 
 func _ready():
+	super._ready()
 	sprite = $Sprite2D as Sprite2D
 	boss_name = "Amelia"
 	boss_title = "Calm Gal"

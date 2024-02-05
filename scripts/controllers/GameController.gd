@@ -8,6 +8,9 @@ signal cease_fire
 func _on_boss_start_combat():
 	print("Start Combat")
 	emit_signal("enable_shooting")
+	
+func on_boss_phase_change():
+	print("boss phase change")
 
 func enemy_bullet_clear():
 	for node in get_tree().get_nodes_in_group("bullets"):

@@ -25,6 +25,7 @@ point_count = 11
 
 [node name="boss-nerdy" type="Node2D" node_paths=PackedStringArray("hit_flash")]
 script = ExtResource("1_8vunn")
+phases = [100, 20.0, 20.0, 20.0]
 hit_flash = NodePath("Sprite2D/HitFlash")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
