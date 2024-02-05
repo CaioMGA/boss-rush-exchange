@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bu53qe6jcyqqd"]
+[gd_scene load_steps=17 format=3 uid="uid://bu53qe6jcyqqd"]
 
 [ext_resource type="Script" path="res://scripts/rooms/boss_rush_room.gd" id="1_0ngu6"]
 [ext_resource type="Script" path="res://scripts/controllers/GameController.gd" id="1_17bj7"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://g67vadu1dviy" path="res://art/backgrounds/bg-2.png" id="8_14drq"]
 [ext_resource type="PackedScene" uid="uid://bka7b4ccpto4u" path="res://scenes/menu/debug.tscn" id="9_ce1wc"]
 [ext_resource type="PackedScene" uid="uid://dmy5af4kanhpx" path="res://scenes/menu/TryAgain.tscn" id="11_5mu0o"]
+[ext_resource type="AudioStream" uid="uid://pxenqllh2kce" path="res://audio/gameplay_a.ogg" id="13_a5ccd"]
 [ext_resource type="Script" path="res://scripts/controllers/SoundGuy.gd" id="13_fq7vs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q3mws"]
@@ -168,6 +169,10 @@ metadata/_edit_lock_ = true
 [node name="soundController" type="Node" parent="."]
 script = ExtResource("13_fq7vs")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="soundController"]
+stream = ExtResource("13_a5ccd")
+autoplay = true
+
 [connection signal="cease_fire" from="GameController" to="Player" method="cease_fire"]
 [connection signal="enable_shooting" from="GameController" to="Player" method="_on_game_controller_enable_shooting"]
 [connection signal="GAMEOVER" from="GameController/Health System" to="GameController/UI Controller" method="show_GAMEOVER_screen"]
@@ -180,6 +185,7 @@ script = ExtResource("13_fq7vs")
 [connection signal="button_down" from="Debug/VBoxContainer/Next Boss" to="." method="load_next_boss"]
 [connection signal="button_down" from="CanvasLayer/TRY AGAIN/MarginContainer/VBoxContainer/Yes" to="." method="restart_level"]
 [connection signal="button_down" from="CanvasLayer/TRY AGAIN/MarginContainer/VBoxContainer/No" to="." method="show_title_screen"]
+[connection signal="finished" from="soundController/AudioStreamPlayer" to="soundController" method="play_loop"]
 
 [editable path="Player"]
 [editable path="Debug"]

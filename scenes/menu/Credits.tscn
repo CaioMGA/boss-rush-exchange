@@ -71,16 +71,9 @@ bbcode_enabled = true
 text = "Solo Dev: Caio Amaral
 [url]http://caiomga.com[/url]
 
-Sounds from [url=https://freesound.org]Freesound.org[/url]
-- Short Male Pain Sounds (kinda silly), by unfa
-- CLOSE FEMALE LAUGH 048.wav, by sandyrb
-- Sexy vocals, by pyro13djt
-- Woman's harmonics - laughs, by CUeckermann
-- Giggle 4.ogg, by silversatyr
-- giggle, by Singger
-
-Victory theme
-Tara's Theme, by Enoch Light & The Light Brigade, on [url=https://www.youtube.com/watch?v=SeKPlhaNLkY]Youtube[/url]"
+Music:
+Lifeforce House, by Bogart VGM
+[url]https://opengameart.org/content/lifeforce-house[/url]"
 
 [connection signal="button_down" from="btn_back" to="." method="_on_btn_back_button_down"]
 [connection signal="meta_clicked" from="MarginContainer/RichTextLabel" to="." method="_on_rich_text_label_meta_clicked"]

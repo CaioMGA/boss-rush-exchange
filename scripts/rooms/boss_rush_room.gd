@@ -14,6 +14,7 @@ const boss_list = [
 		]
 
 func _ready():
+	var cur_boss_index = 0
 	load_next_boss()
 
 func load_next_boss():
