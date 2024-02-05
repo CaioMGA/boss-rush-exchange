@@ -36,8 +36,8 @@ func disable_collision_and_destroy():
 		collisionShape.queue_free()
 	
 	if animated:
-		var sprite = $AnimatedSprite2D
-		sprite.self_modulate = sprite.self_modulate.darkened(0.5)
+		var sprt = $AnimatedSprite2D
+		sprt.self_modulate = sprt.self_modulate.darkened(0.5)
 		set_kill_timer_wait_time(2.0)
 		return
 	

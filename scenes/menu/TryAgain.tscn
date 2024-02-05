@@ -1,0 +1,82 @@
+[gd_scene format=3 uid="uid://dmy5af4kanhpx"]
+
+[node name="TRY AGAIN" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -178.0
+offset_top = -90.0
+offset_right = 178.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Title" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 64)
+layout_direction = 3
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/normal_font_size = 40
+text = "YOU LOSE"
+scroll_active = false
+autowrap_mode = 0
+meta_underlined = false
+hint_underlined = false
+language = "en"
+
+[node name="Message" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 64)
+layout_direction = 3
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/normal_font_size = 40
+text = "Try gain?"
+scroll_active = false
+autowrap_mode = 0
+meta_underlined = false
+hint_underlined = false
+language = "en"
+
+[node name="Yes" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "YES!"
+
+[node name="No" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "No"

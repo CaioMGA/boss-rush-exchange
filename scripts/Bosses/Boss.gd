@@ -2,12 +2,16 @@ extends Node
 
 class_name Boss
 
+signal start_combat
 signal end_phase
 signal hit
 signal on_death
+signal on_prepare_entrance_done
 
+func prepare_entrance():
+	on_prepare_entrance_done.emit()
 # base class to be extended by bosses individual classes
-@export var phases:Array[float]
+@onready var phases = [10]
 
 var boss_name = "Gal Name"
 var boss_title = "Something Gal"
@@ -19,21 +23,6 @@ var cur_phase = 0
 
 @export var hit_flash:HitFlash
 
-signal start_combat
-
-func _ready():
-	cur_phase = 0
-	cur_hp_max = phases[cur_phase]
-	cur_hp = cur_hp_max
-	
-func get_hp_total():
-	return cur_hp_max
-	
-func get_hp_remaining():
-	return cur_hp
-
-func get_cur_phase ():
-	return cur_phase
 
 func enter():
 	pass

@@ -4,13 +4,13 @@
 [ext_resource type="Script" path="res://scripts/controllers/GameController.gd" id="1_17bj7"]
 [ext_resource type="PackedScene" uid="uid://dmek2nyuv6slq" path="res://scenes/player.tscn" id="2_4a2v7"]
 [ext_resource type="Script" path="res://scripts/HealthSystem.gd" id="3_e5xyu"]
-[ext_resource type="PackedScene" uid="uid://b68wx6n7c0741" path="res://scenes/enemies/enemy-demo.tscn" id="3_otvns"]
 [ext_resource type="Script" path="res://scripts/controllers/UIController.gd" id="4_6dj40"]
-[ext_resource type="PackedScene" uid="uid://e744k2hsji7g" path="res://scenes/bullets/bullet_orange.tscn" id="4_g2htr"]
+[ext_resource type="PackedScene" uid="uid://bovnu42nyxntp" path="res://scenes/menu/VICTORY.tscn" id="5_3oqc8"]
 [ext_resource type="Script" path="res://scripts/misc/destroyer.gd" id="5_mq6oq"]
 [ext_resource type="Shader" path="res://shaders/background_scroll.gdshader" id="7_m5h20"]
 [ext_resource type="Texture2D" uid="uid://g67vadu1dviy" path="res://art/backgrounds/bg-2.png" id="8_14drq"]
 [ext_resource type="PackedScene" uid="uid://bka7b4ccpto4u" path="res://scenes/menu/debug.tscn" id="9_ce1wc"]
+[ext_resource type="PackedScene" uid="uid://dmy5af4kanhpx" path="res://scenes/menu/TryAgain.tscn" id="11_5mu0o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q3mws"]
 size = Vector2(87, 880)
@@ -34,13 +34,15 @@ script = ExtResource("1_17bj7")
 script = ExtResource("3_e5xyu")
 player = NodePath("../../Player")
 
-[node name="UI Controller" type="Node" parent="GameController" node_paths=PackedStringArray("player_score", "player_hp", "player_lives", "boss_hp", "boss_phase", "health_sys")]
+[node name="UI Controller" type="Node" parent="GameController" node_paths=PackedStringArray("player_score", "player_hp", "player_lives", "boss_hp", "boss_phase", "GAMEOVER_screen", "VICTORY_screen", "health_sys")]
 script = ExtResource("4_6dj40")
 player_score = NodePath("VBoxContainer/Score")
 player_hp = NodePath("VBoxContainer/HP")
 player_lives = NodePath("VBoxContainer/Lives")
 boss_hp = NodePath("Boss/Boss HP")
 boss_phase = NodePath("Boss/Boss Phase")
+GAMEOVER_screen = NodePath("../../CanvasLayer/TRY AGAIN")
+VICTORY_screen = NodePath("../../CanvasLayer/GAME OVER")
 health_sys = NodePath("../Health System")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GameController/UI Controller"]
@@ -105,16 +107,6 @@ autowrap_mode = 0
 [node name="Player" parent="." instance=ExtResource("2_4a2v7")]
 position = Vector2(222, 546)
 
-[node name="enemy-demo" parent="." instance=ExtResource("3_otvns")]
-visible = false
-position = Vector2(702, 116)
-bullet_scene = ExtResource("4_g2htr")
-rotate_speed = 20
-shooter_timer_wait_time = 0.2
-spawn_point_count = 6
-radius = 4
-bullet_speed = 300
-
 [node name="Destroyer" type="Area2D" parent="."]
 position = Vector2(0, -77)
 script = ExtResource("5_mq6oq")
@@ -161,8 +153,19 @@ visible = false
 position = Vector2(240, 100)
 metadata/_edit_lock_ = true
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GAME OVER" parent="CanvasLayer" instance=ExtResource("5_3oqc8")]
+visible = false
+metadata/_edit_lock_ = true
+
+[node name="TRY AGAIN" parent="CanvasLayer" instance=ExtResource("11_5mu0o")]
+visible = false
+metadata/_edit_lock_ = true
+
 [connection signal="cease_fire" from="GameController" to="Player" method="cease_fire"]
 [connection signal="enable_shooting" from="GameController" to="Player" method="_on_game_controller_enable_shooting"]
+[connection signal="GAMEOVER" from="GameController/Health System" to="GameController/UI Controller" method="show_GAMEOVER_screen"]
 [connection signal="must_update_ui" from="GameController/Health System" to="GameController/UI Controller" method="update_ui"]
 [connection signal="player_death" from="GameController/Health System" to="." method="bullet_clear"]
 [connection signal="player_is_hurt" from="GameController/Health System" to="." method="bullet_clear"]
@@ -170,6 +173,9 @@ metadata/_edit_lock_ = true
 [connection signal="on_player_loses_life" from="Player" to="GameController/Health System" method="kill_player"]
 [connection signal="area_entered" from="Destroyer" to="Destroyer" method="_on_area_entered"]
 [connection signal="button_down" from="Debug/VBoxContainer/Next Boss" to="." method="load_next_boss"]
+[connection signal="button_down" from="CanvasLayer/TRY AGAIN/MarginContainer/VBoxContainer/Yes" to="." method="restart_level"]
+[connection signal="button_down" from="CanvasLayer/TRY AGAIN/MarginContainer/VBoxContainer/No" to="." method="show_title_screen"]
 
 [editable path="Player"]
 [editable path="Debug"]
+[editable path="CanvasLayer/TRY AGAIN"]

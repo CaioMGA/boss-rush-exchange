@@ -10,44 +10,20 @@ var entrance_routine_active = false
 var is_alive = false
 
 func _ready():
-	super._ready()
+	phases = [100, 200]
+	#phases = [10, 10, 10]
+	cur_phase = 0
+	cur_hp_max = phases[cur_phase]
+	cur_hp = cur_hp_max
 	sprite = $Sprite2D as Sprite2D
 	boss_name = "Amelia"
 	boss_title = "Calm Gal"
-	
-	var phase1 = BossPhase.new()
-	phase1.life = 1000
-	phase1.is_invencible = false
-	phase1.duration = 0
-	phase1.cancel_bullets_on_phase_end = true
-	
-	var phase2 = BossPhase.new()
-	phase1.life = 800
-	phase1.is_invencible = false
-	phase1.duration = 0
-	phase1.cancel_bullets_on_phase_end = false
-	
-	var phase3 = BossPhase.new()
-	phase1.life = 1000
-	phase1.is_invencible = false
-	phase1.duration = 0
-	phase1.cancel_bullets_on_phase_end = true
-	
-	var phase4 = BossPhase.new()
-	phase1.life = 500
-	phase1.is_invencible = false
-	phase1.duration = 0
-	phase1.cancel_bullets_on_phase_end = true
-	
-	phases.append(phase1)
-	phases.append(phase2)
-	phases.append(phase3)
-	phases.append(phase4)
 	
 	prepare_entrance()
 	enter()
 
 func prepare_entrance():
+	super.prepare_entrance()
 	position_entrance = sprite.global_position
 	sprite.global_position.y -= 100
 	entrance_duration = 5.0
