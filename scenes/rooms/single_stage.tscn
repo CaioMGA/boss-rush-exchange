@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/controllers/GameController.gd" id="1_e0y0a"]
 [ext_resource type="PackedScene" uid="uid://dmek2nyuv6slq" path="res://scenes/player.tscn" id="2_1cr17"]
 [ext_resource type="PackedScene" uid="uid://b68wx6n7c0741" path="res://scenes/enemies/enemy-demo.tscn" id="3_gndls"]
-[ext_resource type="PackedScene" path="res://scenes/bullets/bullet_orange.tscn" id="4_sowyn"]
+[ext_resource type="PackedScene" uid="uid://e744k2hsji7g" path="res://scenes/bullets/bullet_orange.tscn" id="4_sowyn"]
 [ext_resource type="Script" path="res://scripts/misc/destroyer.gd" id="5_vf40l"]
 [ext_resource type="PackedScene" uid="uid://b1rxp462pka5g" path="res://scenes/enemies/bosses/boss-nerdy.tscn" id="6_5blq0"]
 [ext_resource type="Shader" path="res://shaders/background_scroll.gdshader" id="7_n1xc1"]

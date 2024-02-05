@@ -80,6 +80,8 @@ func _on_area_entered(area):
 
 func cease_fire():
 	can_shoot = false
+	regular_shoot_timer.stop()
+	focus_shoot_timer.stop()
 	
 func enable_shooting():
 	can_shoot = true
@@ -87,3 +89,7 @@ func enable_shooting():
 
 func _on_game_controller_enable_shooting():
 	enable_shooting()
+
+
+func _on_game_controller_cease_fire():
+	pass # Replace with function body.

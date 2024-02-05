@@ -37,6 +37,5 @@ func death():
 	pass
 
 func on_hit():
-	print("boss got hit")
 	hit_flash.modulate.a = 1
 	is_hit = true

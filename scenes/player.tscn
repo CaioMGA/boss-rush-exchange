@@ -158,8 +158,7 @@ position = Vector2(3, -8)
 rotation = -1.5708
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Shooter/ShotModulation" to="Shooter" method="_on_shot_modulation_timeout"]
-[connection signal="timeout" from="Shooter/ShootTimer" to="Shooter" method="_on_shoot_timer_timeout" flags=18]
+[connection signal="timeout" from="Shooter/ShootTimer" to="Shooter" method="_on_shoot_timer_timeout"]
 [connection signal="timeout" from="FocusShooter/ShotModulation" to="FocusShooter" method="_on_shot_modulation_timeout"]
-[connection signal="timeout" from="FocusShooter/ShootTimer" to="FocusShooter" method="_on_shoot_timer_timeout" flags=18]
+[connection signal="timeout" from="FocusShooter/ShootTimer" to="FocusShooter" method="_on_shoot_timer_timeout"]

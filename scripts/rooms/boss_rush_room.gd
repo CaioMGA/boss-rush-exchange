@@ -19,6 +19,7 @@ func load_next_boss():
 	boss_instance.global_position = boss_spawn_point.global_position
 	add_child(boss_instance)
 	boss = boss_instance as Boss
+	boss.connect("start_combat", game_controller._on_boss_start_combat)
 	cur_boss_index += 1
 	
 	if cur_boss_index >= boss_list.size():
@@ -32,3 +33,4 @@ func destroy_boss():
 	
 	game_controller.enemy_bullet_clear()
 	game_controller.player_bullet_clear()
+	game_controller.cease_fire.emit()

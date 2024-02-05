@@ -2,6 +2,7 @@ extends Node
 class_name GameController
 # Controls shmup elements and events
 signal enable_shooting
+signal cease_fire
 
 
 func _on_boss_start_combat():
