@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cqhauxto40b5g"]
+[gd_scene load_steps=14 format=3 uid="uid://cqhauxto40b5g"]
 
 [ext_resource type="Script" path="res://scripts/rooms/TitleScreen.gd" id="1_0elyr"]
 [ext_resource type="Shader" path="res://shaders/background_scroll.gdshader" id="2_fcyoc"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://2jbbp4hehdrk" path="res://scenes/menu/Credits.tscn" id="7_qjgbh"]
 [ext_resource type="PackedScene" uid="uid://c8666p48j7i7u" path="res://scenes/menu/DifficultySelect.tscn" id="8_t6rah"]
 [ext_resource type="PackedScene" uid="uid://coj2vj4qxb5ll" path="res://scenes/menu/PreGameConfirmation.tscn" id="9_vqal2"]
+[ext_resource type="AudioStream" uid="uid://pxenqllh2kce" path="res://audio/gameplay_a.ogg" id="10_higl2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gyr8v"]
 shader = ExtResource("2_fcyoc")
@@ -174,6 +175,10 @@ metadata/_edit_lock_ = true
 visible = false
 layout_mode = 1
 metadata/_edit_lock_ = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_higl2")
+autoplay = true
 
 [connection signal="button_down" from="MarginContainer/VBoxContainer/btn_boss_rush" to="." method="_on_btn_boss_rush_button_down"]
 [connection signal="button_down" from="MarginContainer/VBoxContainer/btn_stage_select" to="." method="_on_btn_stage_select_button_down"]

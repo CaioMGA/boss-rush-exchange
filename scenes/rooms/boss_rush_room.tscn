@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bu53qe6jcyqqd"]
+[gd_scene load_steps=16 format=3 uid="uid://bu53qe6jcyqqd"]
 
 [ext_resource type="Script" path="res://scripts/rooms/boss_rush_room.gd" id="1_0ngu6"]
 [ext_resource type="Script" path="res://scripts/controllers/GameController.gd" id="1_17bj7"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://g67vadu1dviy" path="res://art/backgrounds/bg-2.png" id="8_14drq"]
 [ext_resource type="PackedScene" uid="uid://bka7b4ccpto4u" path="res://scenes/menu/debug.tscn" id="9_ce1wc"]
 [ext_resource type="PackedScene" uid="uid://dmy5af4kanhpx" path="res://scenes/menu/TryAgain.tscn" id="11_5mu0o"]
+[ext_resource type="Script" path="res://scripts/controllers/SoundGuy.gd" id="13_fq7vs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q3mws"]
 size = Vector2(87, 880)
@@ -52,6 +53,7 @@ offset_right = 184.0
 offset_bottom = 146.0
 
 [node name="Score" type="RichTextLabel" parent="GameController/UI Controller/VBoxContainer"]
+visible = false
 clip_contents = false
 layout_mode = 2
 text = "Score: 000 000 000 000"
@@ -162,6 +164,9 @@ metadata/_edit_lock_ = true
 [node name="TRY AGAIN" parent="CanvasLayer" instance=ExtResource("11_5mu0o")]
 visible = false
 metadata/_edit_lock_ = true
+
+[node name="soundController" type="Node" parent="."]
+script = ExtResource("13_fq7vs")
 
 [connection signal="cease_fire" from="GameController" to="Player" method="cease_fire"]
 [connection signal="enable_shooting" from="GameController" to="Player" method="_on_game_controller_enable_shooting"]
