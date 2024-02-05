@@ -6,6 +6,8 @@ class_name Bullet
 var is_slowing_down = false
 var slow_down_factor = 1.6
 
+@onready var collisionShape = $CollisionShape2D
+
 func _ready():
 	if animated:
 		$AnimatedSprite2D.play("default")
@@ -30,8 +32,6 @@ func set_kill_timer_wait_time(wait_time):
 	$KillTimer.start()
 
 func disable_collision_and_destroy():
-	var collisionShape = $CollisionShape2D
-	remove_child(collisionShape)
 	if collisionShape != null:
 		collisionShape.queue_free()
 	
