@@ -15,19 +15,16 @@ func _on_btn_back_button_down():
 	visible = false
 
 func _on_bgm_slider_value_changed(value):
-	print("_on_bgm_slider_value_changed(value):")
 	Globals.settings["bgm_vol"] = value
 	AudioServer.set_bus_volume_db(Globals.BGM_BUS_ID, linear_to_db(value))
 	AudioServer.set_bus_mute(Globals.BGM_BUS_ID, value < .05)
 
 func _on_sfx_slider_value_changed(value):
-	print("_on_sfx_slider_value_changed(value):")
 	Globals.settings["sfx_vol"] = value
 	AudioServer.set_bus_volume_db(Globals.SFX_BUS_ID, linear_to_db(value))
 	AudioServer.set_bus_mute(Globals.SFX_BUS_ID, value < .05)
 
 func _on_master_slider_value_changed(value):
-	print("_on_master_slider_value_changed(value):")
 	Globals.settings["master_vol"] = value
 	AudioServer.set_bus_volume_db(Globals.MASTER_BUS_ID, linear_to_db(value))
 	AudioServer.set_bus_mute(Globals.MASTER_BUS_ID, value < .05)
