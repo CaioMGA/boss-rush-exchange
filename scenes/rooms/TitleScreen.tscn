@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cqhauxto40b5g"]
+[gd_scene load_steps=15 format=3 uid="uid://cqhauxto40b5g"]
 
 [ext_resource type="Script" path="res://scripts/rooms/TitleScreen.gd" id="1_0elyr"]
 [ext_resource type="Shader" path="res://shaders/background_scroll.gdshader" id="2_fcyoc"]
@@ -6,10 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://bfe8ik3g2d23u" path="res://scenes/player_title_screen.tscn" id="4_tv1ry"]
 [ext_resource type="PackedScene" uid="uid://dhnurycqtpl0j" path="res://scenes/menu/StageSelect.tscn" id="5_7q84h"]
 [ext_resource type="PackedScene" uid="uid://c3ns44h0tec1b" path="res://scenes/menu/About.tscn" id="6_ttfvg"]
+[ext_resource type="PackedScene" uid="uid://dbwlp1oymptme" path="res://scenes/menu/Settings.tscn" id="7_pog3s"]
 [ext_resource type="PackedScene" uid="uid://2jbbp4hehdrk" path="res://scenes/menu/Credits.tscn" id="7_qjgbh"]
 [ext_resource type="PackedScene" uid="uid://c8666p48j7i7u" path="res://scenes/menu/DifficultySelect.tscn" id="8_t6rah"]
 [ext_resource type="PackedScene" uid="uid://coj2vj4qxb5ll" path="res://scenes/menu/PreGameConfirmation.tscn" id="9_vqal2"]
-[ext_resource type="AudioStream" uid="uid://pxenqllh2kce" path="res://audio/gameplay_a.ogg" id="10_higl2"]
+[ext_resource type="AudioStream" uid="uid://d05ftsxcj5ku3" path="res://audio/music/spacetheme.ogg" id="11_8boey"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gyr8v"]
 shader = ExtResource("2_fcyoc")
@@ -25,7 +26,7 @@ _data = {
 }
 point_count = 10
 
-[node name="TitleScreen" type="Control" node_paths=PackedStringArray("menu_difficulty_select", "menu_stage_select", "menu_credits", "menu_about", "menu_pregame")]
+[node name="TitleScreen" type="Control" node_paths=PackedStringArray("menu_difficulty_select", "menu_stage_select", "menu_credits", "menu_about", "menu_settings", "menu_pregame")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -37,6 +38,7 @@ menu_difficulty_select = NodePath("Difficulty Select")
 menu_stage_select = NodePath("Stage Select")
 menu_credits = NodePath("Credits")
 menu_about = NodePath("About")
+menu_settings = NodePath("Settings")
 menu_pregame = NodePath("PreGameConfirmation")
 metadata/_edit_lock_ = true
 
@@ -126,6 +128,13 @@ theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 24
 text = "About"
 
+[node name="btn_settings" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "Settings"
+
 [node name="Path2D" type="Path2D" parent="."]
 position = Vector2(25, 0)
 curve = SubResource("Curve2D_m0umv")
@@ -161,6 +170,9 @@ visible = false
 layout_mode = 1
 metadata/_edit_lock_ = true
 
+[node name="Settings" parent="." instance=ExtResource("7_pog3s")]
+layout_mode = 1
+
 [node name="Credits" parent="." instance=ExtResource("7_qjgbh")]
 visible = false
 layout_mode = 1
@@ -177,13 +189,15 @@ layout_mode = 1
 metadata/_edit_lock_ = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("10_higl2")
+stream = ExtResource("11_8boey")
 autoplay = true
+bus = &"BGM"
 
 [connection signal="button_down" from="MarginContainer/VBoxContainer/btn_boss_rush" to="." method="_on_btn_boss_rush_button_down"]
 [connection signal="button_down" from="MarginContainer/VBoxContainer/btn_stage_select" to="." method="_on_btn_stage_select_button_down"]
 [connection signal="button_down" from="MarginContainer/VBoxContainer/btn_credits" to="." method="_on_btn_credits_button_down"]
 [connection signal="button_down" from="MarginContainer/VBoxContainer/btn_about" to="." method="_on_btn_about_button_down"]
+[connection signal="button_down" from="MarginContainer/VBoxContainer/btn_settings" to="." method="_on_btn_settings_button_down"]
 [connection signal="button_down" from="Stage Select/MarginContainer/VBoxContainer/btn_stage_1" to="." method="_on_btn_stage_button_down" binds= [1]]
 [connection signal="button_down" from="Stage Select/MarginContainer/VBoxContainer/btn_stage_2" to="." method="_on_btn_stage_button_down" binds= [2]]
 [connection signal="button_down" from="Stage Select/MarginContainer/VBoxContainer/btn_stage_3" to="." method="_on_btn_stage_button_down" binds= [3]]

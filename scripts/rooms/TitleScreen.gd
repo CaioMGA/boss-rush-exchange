@@ -3,6 +3,7 @@ extends Control
 @export var menu_stage_select:Node
 @export var menu_credits:Node
 @export var menu_about:Node
+@export var menu_settings:Node
 
 @export var menu_pregame:Node
 
@@ -58,3 +59,7 @@ func _on_pregame_start_button_down():
 	else:
 		var scene = "res://scenes/rooms/single_stage.tscn"
 		get_tree().change_scene_to_file(scene)
+
+
+func _on_btn_settings_button_down():
+	menu_settings.show_settings()

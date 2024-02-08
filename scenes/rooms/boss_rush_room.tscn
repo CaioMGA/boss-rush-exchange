@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://g67vadu1dviy" path="res://art/backgrounds/bg-2.png" id="8_14drq"]
 [ext_resource type="PackedScene" uid="uid://bka7b4ccpto4u" path="res://scenes/menu/debug.tscn" id="9_ce1wc"]
 [ext_resource type="PackedScene" uid="uid://dmy5af4kanhpx" path="res://scenes/menu/TryAgain.tscn" id="11_5mu0o"]
-[ext_resource type="AudioStream" uid="uid://pxenqllh2kce" path="res://audio/gameplay_a.ogg" id="13_a5ccd"]
+[ext_resource type="AudioStream" uid="uid://pxenqllh2kce" path="res://audio/music/gameplay_a.ogg" id="13_a5ccd"]
 [ext_resource type="Script" path="res://scripts/controllers/SoundGuy.gd" id="13_fq7vs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q3mws"]
@@ -172,6 +172,7 @@ script = ExtResource("13_fq7vs")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="soundController"]
 stream = ExtResource("13_a5ccd")
 autoplay = true
+bus = &"BGM"
 
 [connection signal="cease_fire" from="GameController" to="Player" method="cease_fire"]
 [connection signal="enable_shooting" from="GameController" to="Player" method="_on_game_controller_enable_shooting"]

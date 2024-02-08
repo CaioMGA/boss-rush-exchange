@@ -6,9 +6,9 @@ var audio_stream_player:AudioStreamPlayer
 
 func _ready():
 	audio_stream_player = $AudioStreamPlayer
-	audio_stream_player.stream = load("res://audio/gameplay_intro.ogg")
-	stage_loop.append(preload("res://audio/gameplay_a.ogg"))
-	stage_loop.append(preload("res://audio/gameplay_b.ogg"))
+	audio_stream_player.stream = load("res://audio/music/gameplay_intro.ogg")
+	stage_loop.append(preload("res://audio/music/gameplay_a.ogg"))
+	stage_loop.append(preload("res://audio/music/gameplay_b.ogg"))
 	
 	audio_stream_player.play()
 	
