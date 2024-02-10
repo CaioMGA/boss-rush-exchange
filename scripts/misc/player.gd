@@ -18,10 +18,9 @@ var speed
 var screen_size
 var is_moving_slow = false
 var is_focus_shooting = true
-var life = 3
+@export var life = 3
 
 var can_shoot = false
-
 
 func _ready():
 	screen_size = get_viewport_rect().size
