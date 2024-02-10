@@ -1,12 +1,18 @@
 extends Node2D
 
 class_name Bullet
-@export var speed = 300
-@export var animated = false;
-var is_slowing_down = false
-var slow_down_factor = 1.6
 
 @onready var collisionShape = $CollisionShape2D
+
+@export var speed = 300
+@export var animated = false;
+@export var grow_at_start = false
+
+var is_slowing_down = false
+var slow_down_factor = 1.6
+var is_growing = false
+var grow_factor = 2.0
+
 
 func _ready():
 	if animated:
@@ -18,7 +24,17 @@ func _process(delta):
 		modulate.a -= delta * 0.5
 		
 	position += transform.x * speed * delta
-	
+	if is_growing:
+		var increment = delta * grow_factor
+		scale += Vector2(increment, increment) 
+		if scale.x > 1:
+			scale = Vector2(1, 1)
+			is_growing = false
+
+func grow():
+	scale = Vector2(0, 0)
+	is_growing = true
+
 func _on_kill_timer_timeout():
 	queue_free()
 	
