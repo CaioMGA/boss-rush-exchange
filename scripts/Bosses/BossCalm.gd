@@ -54,12 +54,5 @@ func finish_entrance():
 	
 	start_combat.emit()
 
-func _on_area_2d_area_entered(_area):
-	if _area.is_in_group("bullets_player"):
-		on_hit()
-		_area.queue_free()
-		# decrease health
-
-
 func _on_boss_start_combat():
 	pass # Replace with function body.

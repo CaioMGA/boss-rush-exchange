@@ -24,6 +24,8 @@ var cur_hp = 0.0
 var cur_hp_max = 0.0
 var cur_phase = 0
 
+var is_invincible = false
+
 
 @export var hit_flash:HitFlash
 
@@ -59,11 +61,13 @@ func next_phase():
 	cur_hp = cur_hp_max
 
 func start_invincibility():
+	is_invincible = true
 	sprite_2d.modulate.a = 0.5
 	cease_fire()
 	timer.start()
 
 func _on_invincibility_end():
+	is_invincible = false
 	sprite_2d.modulate.a = 1
 	enable_shooting()
 
@@ -74,3 +78,12 @@ func cease_fire():
 func enable_shooting():
 	for shooter in shooters:
 		shooter.enable_shooting()
+
+func on_area_2d_area_entered(_area):
+	if(is_invincible) :
+		return
+		
+	if _area.is_in_group("bullets_player"):
+		on_hit()
+		_area.queue_free()
+		# decrease health
