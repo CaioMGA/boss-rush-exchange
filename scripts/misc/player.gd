@@ -12,6 +12,7 @@ signal on_player_loses_life
 @export var focus_shoot_timer:Timer
 
 @export var collision_shape:CollisionShape2D
+@onready var audio_stream_player = $AudioStreamPlayer
 
 var speed
 var screen_size
@@ -93,9 +94,11 @@ func cease_fire():
 	can_shoot = false
 	regular_shoot_timer.stop()
 	focus_shoot_timer.stop()
+	audio_stream_player.stop()
 
 func enable_shooting():
 	can_shoot = true
+	audio_stream_player.play()
 
 func _on_game_controller_enable_shooting():
 	enable_shooting()

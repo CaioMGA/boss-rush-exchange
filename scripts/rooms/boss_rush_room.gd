@@ -14,7 +14,8 @@ const boss_list = [
 		]
 
 func _ready():
-	var cur_boss_index = 0
+	GAMEOVER_state = false
+	cur_boss_index = 0
 	load_next_boss()
 
 func load_next_boss():
@@ -36,10 +37,13 @@ func load_next_boss():
 	boss = boss_instance as Boss
 	boss.connect("start_combat", game_controller._on_boss_start_combat)
 	boss.end_phase.connect(game_controller.on_boss_phase_change)
-	boss.end_phase.connect(ui_controller.update_ui)
-	boss.hit.connect(ui_controller.update_ui)
+	boss.end_phase.connect(ui_controller.update_boss_ui)
+	boss.end_phase.connect(game_controller.enemy_bullet_clear)
+	boss.hit.connect(ui_controller.update_boss_hp_ui)
 	boss.on_death.connect(load_next_boss)
-	boss.on_prepare_entrance_done.connect(ui_controller.update_ui)
+	boss.on_death.connect(bullet_clear)
+	boss.on_prepare_entrance_done.connect(ui_controller.update_boss_hp_ui)
+	boss.on_prepare_entrance_done.connect(ui_controller.update_boss_ui)
 	ui_controller.boss = boss
 	cur_boss_index += 1
 

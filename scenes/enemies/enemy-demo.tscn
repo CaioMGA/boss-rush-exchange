@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b68wx6n7c0741"]
 
-[ext_resource type="Script" path="res://scripts/misc/enemy-demo.gd" id="1_ehu1a"]
+[ext_resource type="Script" path="res://scripts/misc/enemy-shooter.gd" id="1_ehu1a"]
 [ext_resource type="Texture2D" uid="uid://c3jxocgtpjk5s" path="res://art/bullets/orange_round.png" id="2_p12fh"]
 
 [node name="enemy-demo" type="Node2D"]

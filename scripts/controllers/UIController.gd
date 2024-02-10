@@ -12,12 +12,16 @@ extends Node
 @export var health_sys:HealthSystem
 @export var boss:Boss
 	
-func update_ui():
+
+func update_player_ui():
 	player_hp.text = "HP: %d" % [health_sys.cur_hp]
 	player_lives.text = "Lives: %d" % [health_sys.continues]
-	
-	boss_hp.text = "Boss: %d/%d" % [boss.cur_hp, boss.cur_hp_max]
+
+func update_boss_ui():
 	boss_phase.text = "Phase: %d/%d" % [boss.cur_phase + 1, boss.phases.size()]
+	
+func update_boss_hp_ui():
+	boss_hp.text = "Boss: %d/%d" % [boss.cur_hp, boss.cur_hp_max]
 
 func show_GAMEOVER_screen():
 	GAMEOVER_screen.visible = true

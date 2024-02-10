@@ -1,5 +1,5 @@
 extends Node2D
-
+class_name EnemyShooter
 @export var bullet_scene = preload("res://scenes/bullets/bullet_pink_round.tscn")
 @onready var shoot_timer = $ShootTimer
 @onready var delay_timer = $DelayTimer
@@ -60,14 +60,17 @@ func _on_shoot_timer_timeout():
 
 func enable_shooting():
 	can_shoot = true
-
+	shoot_timer.start()
+	
+func cease_fire():
+	can_shoot = false
+	shoot_timer.stop()
 
 func _on_game_controller_enable_shooting():
 	enable_shooting()
 
 func _on_delay_shooter_timer_timeout():
 	waiting_delay = false
-
 
 func _on_boss_start_combat():
 	enable_shooting()

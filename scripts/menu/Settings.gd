@@ -23,6 +23,9 @@ func _on_sfx_slider_value_changed(value):
 	Globals.settings["sfx_vol"] = value
 	AudioServer.set_bus_volume_db(Globals.SFX_BUS_ID, linear_to_db(value))
 	AudioServer.set_bus_mute(Globals.SFX_BUS_ID, value < .05)
+	
+	AudioServer.set_bus_volume_db(Globals.PLAYER_SHOTS_BUS_ID, linear_to_db(value))
+	AudioServer.set_bus_mute(Globals.PLAYER_SHOTS_BUS_ID, value < .05)
 
 func _on_master_slider_value_changed(value):
 	Globals.settings["master_vol"] = value
@@ -44,4 +47,3 @@ func show_settings():
 	old_settings = Utils.copy_dictionary(Globals.settings)
 	update_ui()
 	visible = true
-

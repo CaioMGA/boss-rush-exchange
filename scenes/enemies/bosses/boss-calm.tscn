@@ -19,9 +19,13 @@ _data = {
 }
 point_count = 5
 
-[node name="boss-calm" type="Node2D" node_paths=PackedStringArray("hit_flash")]
+[node name="boss-calm" type="Node2D" node_paths=PackedStringArray("shooters", "hit_flash")]
 script = ExtResource("1_6yvx8")
+shooters = [NodePath("Sprite2D/enemy-demo"), NodePath("Sprite2D/Heart Shooter"), NodePath("Sprite2D/enemy-demo2")]
 hit_flash = NodePath("Sprite2D/HitFlash")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 clip_children = 2
@@ -98,4 +102,7 @@ rotates = false
 [connection signal="start_combat" from="." to="Sprite2D/enemy-demo" method="_on_boss_start_combat"]
 [connection signal="start_combat" from="." to="Sprite2D/Heart Shooter" method="_on_boss_start_combat"]
 [connection signal="start_combat" from="." to="Sprite2D/enemy-demo2" method="_on_boss_start_combat"]
+[connection signal="timeout" from="Timer" to="." method="_on_invincibility_end"]
 [connection signal="area_entered" from="Sprite2D/Area2D" to="." method="_on_area_2d_area_entered"]
+
+[editable path="Sprite2D/enemy-demo"]

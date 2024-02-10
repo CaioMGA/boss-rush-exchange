@@ -8,17 +8,18 @@ extends Node
 
 @onready var default_settings = {
 	"bgm_vol": 0.8,
-	"sfx_vol": 0.7,
+	"sfx_vol": 0.3,
 	"master_vol": 0.75,
 }
 
 var BGM_BUS_ID = AudioServer.get_bus_index("BGM")
 var SFX_BUS_ID = AudioServer.get_bus_index("SFX")
 var MASTER_BUS_ID = AudioServer.get_bus_index("Master")
+var PLAYER_SHOTS_BUS_ID = AudioServer.get_bus_index("PlayerShots")
 
 var PLAYER_SETTINGS_PATH = "res://settings.save"
 
-func _init():
+func _ready():
 	load_settings()
 
 func load_settings():

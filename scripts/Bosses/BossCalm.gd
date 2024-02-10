@@ -10,7 +10,7 @@ var entrance_routine_active = false
 var is_alive = false
 
 func _ready():
-	phases = [100, 200]
+	phases = [1, 100]
 	#phases = [10, 10, 10]
 	cur_phase = 0
 	cur_hp_max = phases[cur_phase]

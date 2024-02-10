@@ -23,9 +23,13 @@ _data = {
 }
 point_count = 11
 
-[node name="boss-nerdy" type="Node2D" node_paths=PackedStringArray("hit_flash")]
+[node name="boss-nerdy" type="Node2D" node_paths=PackedStringArray("shooters", "hit_flash")]
 script = ExtResource("1_8vunn")
+shooters = [NodePath("Sprite2D/enemy-demo"), NodePath("Sprite2D/Orange Shooter"), NodePath("Sprite2D/Orange Shooter 2"), NodePath("Sprite2D/enemy-demo2")]
 hit_flash = NodePath("Sprite2D/HitFlash")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 clip_children = 2

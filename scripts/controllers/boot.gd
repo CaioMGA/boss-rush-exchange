@@ -1,6 +1,6 @@
 extends Node2D
 
-func _ready():
+func _init():
 	# load settings
 	Globals.load_settings()
 	
@@ -12,5 +12,6 @@ func _ready():
 	AudioServer.set_bus_volume_db(Globals.MASTER_BUS_ID, linear_to_db(Globals.settings["master_vol"]))
 	AudioServer.set_bus_mute(Globals.MASTER_BUS_ID, Globals.settings["master_vol"] < .05)
 	
-	# change scene
-	get_tree().change_scene_to_file("res://scenes/rooms/TitleScreen.tscn")
+
+func _process(_delta):
+	await get_tree().change_scene_to_file("res://scenes/rooms/TitleScreen.tscn")
