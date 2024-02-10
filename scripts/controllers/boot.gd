@@ -14,4 +14,4 @@ func _init():
 	
 
 func _process(_delta):
-	await get_tree().change_scene_to_file("res://scenes/rooms/TitleScreen.tscn")
+	get_tree().change_scene_to_file("res://scenes/rooms/TitleScreen.tscn")

@@ -63,5 +63,3 @@ func _on_area_2d_area_entered(_area):
 
 func _on_boss_start_combat():
 	pass # Replace with function body.
-
-
