@@ -13,9 +13,10 @@ class_name EnemyShooter
 @export var bullet_speed = 50
 @export var bullet_scale = 1.0
 @export var bullet_lifetime = 10
+@export var bullet_grow_at_statup = false
 
 var waiting_delay = false
-var can_shoot = false
+@export var can_shoot = false
 
 func _ready():
 	if shooter_delay_timer_wait_time > 0:
@@ -57,6 +58,8 @@ func _on_shoot_timer_timeout():
 			bullet.scale = Vector2(bullet_scale, bullet_scale)
 			var bulletScript = bullet as Bullet
 			bulletScript.set_kill_timer_wait_time(bullet_lifetime)
+			if bullet_grow_at_statup:
+				bulletScript.grow()
 
 func enable_shooting():
 	can_shoot = true

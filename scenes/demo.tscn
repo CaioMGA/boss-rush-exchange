@@ -1,10 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://c467reyj5vaai"]
+[gd_scene load_steps=11 format=3 uid="uid://c467reyj5vaai"]
 
 [ext_resource type="PackedScene" uid="uid://dmek2nyuv6slq" path="res://scenes/player.tscn" id="1_hmerg"]
 [ext_resource type="PackedScene" uid="uid://b68wx6n7c0741" path="res://scenes/enemies/enemy-demo.tscn" id="2_tg6k0"]
-[ext_resource type="PackedScene" path="res://scenes/bullets/bullet_orange.tscn" id="4_ij8vc"]
+[ext_resource type="PackedScene" uid="uid://e744k2hsji7g" path="res://scenes/bullets/bullet_orange.tscn" id="4_ij8vc"]
 [ext_resource type="Script" path="res://scripts/misc/destroyer.gd" id="5_usejr"]
-[ext_resource type="PackedScene" uid="uid://cwdtqevwv6pia" path="res://scenes/enemies/bosses/boss-calm.tscn" id="6_n277b"]
 [ext_resource type="Script" path="res://scripts/controllers/GameController.gd" id="7_iwdt8"]
 [ext_resource type="Shader" path="res://shaders/background_scroll.gdshader" id="8_iuiqr"]
 [ext_resource type="Texture2D" uid="uid://bg6vd37xjc4a0" path="res://art/backgrounds/bg-6.png" id="8_llalw"]
@@ -27,6 +26,24 @@ script = ExtResource("7_iwdt8")
 
 [node name="Player" parent="." instance=ExtResource("1_hmerg")]
 position = Vector2(222, 546)
+
+[node name="enemy-demo" parent="Player" instance=ExtResource("2_tg6k0")]
+rotate_speed = 100
+shooter_timer_wait_time = 0.05
+spawn_point_count = 16
+radius = 128
+bullet_speed = 170
+bullet_grow_at_statup = true
+can_shoot = true
+
+[node name="enemy-demo2" parent="Player" instance=ExtResource("2_tg6k0")]
+rotate_speed = -100
+shooter_timer_wait_time = 0.05
+spawn_point_count = 16
+radius = 128
+bullet_speed = 300
+bullet_grow_at_statup = true
+can_shoot = true
 
 [node name="enemy-demo" parent="." instance=ExtResource("2_tg6k0")]
 visible = false
@@ -60,9 +77,6 @@ shape = SubResource("RectangleShape2D_q3mws")
 position = Vector2(244, 754)
 shape = SubResource("RectangleShape2D_4gg3g")
 
-[node name="boss-calm" parent="." instance=ExtResource("6_n277b")]
-position = Vector2(238, 129)
-
 [node name="Bg" type="TextureRect" parent="."]
 z_index = -2000
 material = SubResource("ShaderMaterial_rmfjw")
@@ -76,6 +90,8 @@ metadata/_edit_lock_ = true
 
 [connection signal="enable_shooting" from="GameController" to="Player" method="_on_game_controller_enable_shooting"]
 [connection signal="area_entered" from="Destroyer" to="Destroyer" method="_on_area_entered"]
-[connection signal="start_combat" from="boss-calm" to="GameController" method="_on_bosscalm_start_combat"]
 
 [editable path="Player"]
+[editable path="Player/enemy-demo"]
+[editable path="Player/enemy-demo2"]
+[editable path="enemy-demo"]
