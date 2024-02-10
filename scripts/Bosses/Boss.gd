@@ -47,10 +47,11 @@ func on_hit():
 	hit_flash.flash()
 	cur_hp -= 1
 	if cur_hp <= 0:
+		
 		next_phase()
 
 func next_phase():
-	
+	cur_hp = 1 # just in case...
 	cur_phase += 1
 	if cur_phase >= phases.size():
 		death()
